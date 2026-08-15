@@ -1,3 +1,4 @@
+import Dock from "./components/dock";
 import Navbar from "./components/navbar";
 import Welcome from "./components/welcome";
 
@@ -6,6 +7,7 @@ const App = () => {
     <main>
       <Navbar></Navbar>
       <Welcome></Welcome>
+      <Dock></Dock>
     </main>
    );
 }

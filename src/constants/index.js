@@ -23,4 +23,43 @@ const navIcons = [
   },
 ];
 
-export { navLinks, navIcons };
+const dockApps = [
+  {
+    id: "finder",
+    name: "Portfólio",
+    icon: "finder.png",
+    canOpen: true,
+  },
+  {
+    id: "safari",
+    name: "Projetos",
+    icon: "safari.png",
+    canOpen: true,
+  },
+  {
+    id: "photos",
+    name: "Curriculo",
+    icon: "photos.png",
+    canOpen: true,
+  },
+  {
+    id: "contact",
+    name: "Contato", 
+    icon: "contact.png",
+    canOpen: true,
+  },
+  {
+    id: "terminal",
+    name: "Skills",
+    icon: "terminal.png",
+    canOpen: true,
+  },
+  {
+    id: "trash",
+    name: "Lixeira",
+    icon: "trash.png",
+    canOpen: false,
+  },
+];
+
+export { navLinks, navIcons, dockApps };
