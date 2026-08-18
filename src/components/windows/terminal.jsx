@@ -1,12 +1,13 @@
 import { Check, Flag } from "lucide-react";
 import { techStack } from "../../constants";
 import WindowWrapper from "../windowWrapper";
+import WindowControls from "../windowControls";
 
 const Terminal = () => {
   return (
     <>
       <div id="window-header">
-        <p>Controles da Janela</p>
+        <WindowControls target="terminal"></WindowControls>
         <p>Stack de Tecnologias</p>
       </div>
 
