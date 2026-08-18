@@ -75,4 +75,27 @@ const WINDOW_CONFIG = {
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
-export { navLinks, navIcons, dockApps, INITIAL_Z_INDEX, WINDOW_CONFIG };
+const techStack = [
+  {
+    category: "Frontend",
+    items: ["React.js", "Next.js", "TypeScript", "JavaScript"],
+  },
+  {
+    category: "Estilização",
+    items: ["Tailwind CSS", "BootStrap", "CSS"],
+  },
+  {
+    category: "Backend",
+    items: ["Node.js", "Express", "Prisma"],
+  },
+  {
+    category: "Banco de Dados",
+    items: ["PostgreSQL", "mySQL"],
+  },
+  {
+    category: "Ferramentas",
+    items: ["Git", "GitHub", "AWS"],
+  },
+];
+
+export { navLinks, navIcons, dockApps, INITIAL_Z_INDEX, WINDOW_CONFIG, techStack };
