@@ -1,23 +1,65 @@
 import { useRef } from "react";
 import useWindowStore from "../store/window";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { Draggable } from "gsap/all";
 
 const WindowWrapper = (Component, windowKey) => {
-    const Wrapped = (props) => {
-        const { window: windows } = useWindowStore();
-        const { isOpen, zIndex } = windows[windowKey];
-        const ref = useRef(null);
+  const Wrapped = (props) => {
+    const { focusWindow, window: windows } = useWindowStore();
+    const { isOpen, zIndex } = windows[windowKey];
+    const ref = useRef(null);
 
-        if (!isOpen) return null;
+    useGSAP(() => {
+      const el = ref.current;
+      if (!el) return;
 
-        return (
-            <section id={windowKey} ref={ref} style={{ zIndex }} className="absolute">
-                <Component {...props}></Component>
-            </section>
+      if (isOpen) {
+        el.style.display = "block";
+        gsap.fromTo(
+          el,
+          { scale: 0.8, opacity: 0, y: 40 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
         );
-    };
+      } else {
+        gsap.to(el, {
+          scale: 0.8,
+          opacity: 0,
+          y: 40,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            el.style.display = "none";
+          },
+        });
+      }
+    }, [isOpen]);
 
-    Wrapped.displayName = `WindowWrapper(${Component.displayName || Component.name || "Component"})`;
-    return Wrapped;
+    useGSAP(() => {
+      const el = ref.current;
+      if (!el) return;
+
+      const draggable = Draggable.create(el, {
+        onPress: () => focusWindow(windowKey),
+      });
+
+      return () => draggable[0]?.kill();
+    }, []);
+
+    return (
+      <section
+        id={windowKey}
+        ref={ref}
+        style={{ zIndex, display: "none" }}
+        className="absolute"
+      >
+        <Component {...props}></Component>
+      </section>
+    );
+  };
+
+  Wrapped.displayName = `WindowWrapper(${Component.displayName || Component.name || "Component"})`;
+  return Wrapped;
 };
 
 export default WindowWrapper;
