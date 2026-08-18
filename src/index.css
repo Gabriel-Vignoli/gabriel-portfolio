@@ -130,28 +130,32 @@ body {
     }
 
     .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
+      @apply bg-white p-10 max-w-3xl mx-auto max-h-[60vh] overflow-y-auto;
 
       h2 {
-        @apply text-xl font-bold text-pink-600 mb-10;
+        @apply text-xl font-bold text-pink-600 mb-10 sticky top-0 bg-white;
       }
 
       .blog-post {
-        @apply grid grid-cols-12 space-x-5;
+        @apply flex items-center justify-between gap-5;
 
         img {
-          @apply size-full rounded-md object-cover;
+          @apply size-24 flex-none rounded-md object-cover order-2;
         }
 
         .content {
-          @apply col-span-10 space-y-3;
+          @apply flex-1 space-y-3 order-1;
 
           p {
             @apply text-xs text-gray-500;
           }
 
           h3 {
-            @apply font-semibold text-base text-gray-800;
+            @apply font-semibold text-base text-gray-800 mt-0.5;
+          }
+
+          .category {
+            @apply inline-block text-[10px] font-medium uppercase tracking-wide text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full w-fit;
           }
 
           a {
