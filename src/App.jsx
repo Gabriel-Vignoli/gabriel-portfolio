@@ -6,6 +6,7 @@ import Welcome from "./components/welcome";
 import { Draggable } from "gsap/Draggable";
 import Terminal from "./components/windows/terminal";
 import Safari from "./components/windows/safari";
+import Resume from "./components/windows/resume";
 gsap.registerPlugin(Draggable)
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
 
       <Terminal></Terminal>
       <Safari></Safari>
+      <Resume></Resume>
     </main>
    );
 }

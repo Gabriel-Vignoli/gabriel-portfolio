@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { navIcons, navLinks } from "../constants";
+import useWindowStore from "../store/window";
 
 dayjs.locale("pt-br");
 
@@ -14,6 +15,18 @@ const Navbar = () => {
   const time = now.format("HH:mm");
 
   const formattedDate = `${weekday}, ${day} de ${month} às ${time}`;
+
+  const { openWindow, closeWindow, window: windows } = useWindowStore();
+
+  const toggleWindow = (type) => {
+    const win = windows[type];
+    if (win?.isOpen) {
+      closeWindow(type);
+    } else {
+      openWindow(type);
+    }
+  };
+
   return (
     <nav>
       <div>
@@ -21,8 +34,8 @@ const Navbar = () => {
         <p className="font-bold">Gabriel's Portfolio</p>
 
         <ul>
-          {navLinks.map(({ id, name }) => (
-            <li key={id}>
+          {navLinks.map(({ id, name, type }) => (
+            <li key={id} onClick={() => toggleWindow(type)}>
               <p>{name}</p>
             </li>
           ))}
