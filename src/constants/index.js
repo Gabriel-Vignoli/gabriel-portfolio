@@ -290,4 +290,232 @@ const courses = [
   },
 ];
 
+const WORK_LOCATION = {
+  id: 1,
+  type: "work",
+  name: "Work",
+  icon: "/icons/work.svg",
+  kind: "folder",
+  children: [
+    // ▶ Project 1
+    {
+      id: 5,
+      name: "Vig Barber - Booking Platform",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 left-5",
+      windowPosition: "top-[5vh] left-5",
+      children: [
+        {
+          id: 1,
+          name: "Vig Barber Project.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Vig Barber é uma plataforma full-stack de agendamento para barbearias, permitindo que clientes marquem horários online de forma simples e rápida.",
+            "Em vez de ligações e planilhas manuais, a barbearia gerencia agendamentos, horários e clientes por um painel administrativo completo.",
+            "Pense nisso como ter uma recepcionista digital disponível 24h, cuidando dos agendamentos enquanto você foca no atendimento.",
+            "Construído com Next.js, TypeScript, Prisma, PostgreSQL (Supabase) e NextAuth com login via Google, além de componentes shadcn/ui e Base UI.",
+          ],
+        },
+        {
+          id: 2,
+          name: "vig-barber.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/gabrielvignoli/vig-barber",
+          position: "top-10 right-20",
+        },
+        {
+          id: 4,
+          name: "vig-barber.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-1.png",
+        },
+      ],
+    },
+
+    // ▶ Project 2
+    {
+      id: 6,
+      name: "SBN Circuito - Inscrições",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 right-80",
+      windowPosition: "top-[20vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "SBN Circuito Project.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 right-10",
+          description: [
+            "Sistema de inscrições para o 2º Circuito SBN Original, uma corrida com centenas de participantes.",
+            "Em vez de formulários em papel, os corredores se inscrevem online com confirmação automática e acompanhamento em tempo real.",
+            "Conta com formulário público, página de sucesso e um dashboard administrativo protegido para gerenciar inscrições e envio de confirmações via WhatsApp.",
+            "Construído com Next.js 16, Prisma 7, PostgreSQL (Neon) e validação com Zod v4, com deploy na Vercel.",
+          ],
+        },
+        {
+          id: 2,
+          name: "sbn-circuito.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/gabrielvignoli/sbn-circuito-inscricoes",
+          position: "top-20 left-20",
+        },
+        {
+          id: 4,
+          name: "sbn-circuito.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 left-80",
+          imageUrl: "/images/project-2.png",
+        },
+      ],
+    },
+
+    // ▶ Project 3
+    {
+      id: 7,
+      name: "Restaurante Carijó - Landing Page",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 left-80",
+      windowPosition: "top-[33vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "Carijó Project.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Landing page freelance para o Restaurante e Lanchonete Carijó, criada para apresentar o cardápio e atrair clientes online.",
+            "Em vez de depender apenas do boca a boca, o restaurante ganhou presença digital moderna com visual atrativo e navegação fluida.",
+            "Pense nisso como um cardápio interativo disponível a qualquer hora, direto do celular do cliente.",
+            "Construído com HTML, CSS, JavaScript, GSAP e Three.js, com deploy na Netlify.",
+          ],
+        },
+        {
+          id: 2,
+          name: "restaurantecarijo.com.br",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://restaurantecarijo.com.br",
+          position: "top-10 right-20",
+        },
+        {
+          id: 4,
+          name: "carijo.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-3.png",
+        },
+      ],
+    },
+  ],
+};
+
+const ABOUT_LOCATION = {
+  id: 2,
+  type: "about",
+  name: "About me",
+  icon: "/icons/info.svg",
+  kind: "folder",
+  children: [
+    {
+      id: 1,
+      name: "gabriel.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-10 left-5",
+      imageUrl: "/images/gabriel.jpg",
+    },
+    {
+      id: 2,
+      name: "casual-gabriel.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-28 right-72",
+      imageUrl: "/images/gabriel-2.jpg",
+    },
+    {
+      id: 3,
+      name: "training-gabriel.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-52 left-80",
+      imageUrl: "/images/gabriel-3.jpeg",
+    },
+    {
+      id: 4,
+      name: "about-me.txt",
+      icon: "/images/txt.png",
+      kind: "file",
+      fileType: "txt",
+      position: "top-60 left-5",
+      subtitle: "Conheça o desenvolvedor por trás do código",
+      image: "/images/gabriel.jpg",
+      description: [
+        "Olá! Sou o Gabriel 👋, estudante de Análise e Desenvolvimento de Sistemas na FATEC Mococa e desenvolvedor júnior em busca da minha primeira oportunidade na área.",
+        "Trabalho principalmente com JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, Prisma e TailwindCSS — e gosto de deixar tudo com uma boa experiência de uso.",
+        "Sou bastante focado em UI limpa, boa UX e em escrever código organizado e fácil de manter.",
+        "Fora da programação, você me encontra treinando musculação, praticando Muay Thai, jogando futsal ou curtindo um bom jogo no PC 😅",
+      ],
+    },
+  ],
+};
+
+const RESUME_LOCATION = {
+  id: 3,
+  type: "resume",
+  name: "Resume",
+  icon: "/icons/file.svg",
+  kind: "folder",
+  children: [
+    {
+      id: 1,
+      name: "curriculo.pdf",
+      icon: "/images/pdf.png",
+      kind: "file",
+      fileType: "pdf",
+      href: "/files/curriculo.pdf",
+    },
+  ],
+};
+
+const TRASH_LOCATION = {
+  id: 4,
+  type: "trash",
+  name: "Trash",
+  icon: "/icons/trash.svg",
+  kind: "folder",
+  children: [],
+};
+
+export const locations = {
+  work: WORK_LOCATION,
+  about: ABOUT_LOCATION,
+  resume: RESUME_LOCATION,
+  trash: TRASH_LOCATION,
+};
+
 export { navLinks, navIcons, dockApps, INITIAL_Z_INDEX, WINDOW_CONFIG, techStack, courses };
