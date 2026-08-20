@@ -8,10 +8,11 @@ import Terminal from "./components/windows/terminal";
 import Safari from "./components/windows/safari";
 import Resume from "./components/windows/resume";
 import Finder from "./components/windows/finder";
-gsap.registerPlugin(Draggable)
+import Text from "./components/windows/text";
+gsap.registerPlugin(Draggable);
 
 const App = () => {
-  return ( 
+  return (
     <main>
       <Navbar></Navbar>
       <Welcome></Welcome>
@@ -21,8 +22,9 @@ const App = () => {
       <Safari></Safari>
       <Resume></Resume>
       <Finder></Finder>
+      <Text></Text>
     </main>
-   );
-}
- 
+  );
+};
+
 export default App;
