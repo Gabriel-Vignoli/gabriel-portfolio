@@ -293,7 +293,7 @@ const courses = [
 const WORK_LOCATION = {
   id: 1,
   type: "work",
-  name: "Work",
+  name: "Portifolio",
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
@@ -308,17 +308,12 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Vig Barber Project.txt",
-          icon: "/images/txt.png",
+          name: "GitHub - vig-barber",
+          icon: "/images/github.png",
           kind: "file",
-          fileType: "txt",
+          fileType: "url",
+          href: "https://github.com/Gabriel-Vignoli/vig-barber",
           position: "top-5 left-10",
-          description: [
-            "Vig Barber é uma plataforma full-stack de agendamento para barbearias, permitindo que clientes marquem horários online de forma simples e rápida.",
-            "Em vez de ligações e planilhas manuais, a barbearia gerencia agendamentos, horários e clientes por um painel administrativo completo.",
-            "Pense nisso como ter uma recepcionista digital disponível 24h, cuidando dos agendamentos enquanto você foca no atendimento.",
-            "Construído com Next.js, TypeScript, Prisma, PostgreSQL (Supabase) e NextAuth com login via Google, além de componentes shadcn/ui e Base UI.",
-          ],
         },
         {
           id: 2,
@@ -326,7 +321,7 @@ const WORK_LOCATION = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/gabrielvignoli/vig-barber",
+          href: "https://vig-barber.vercel.app/",
           position: "top-10 right-20",
         },
         {
@@ -352,17 +347,12 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "SBN Circuito Project.txt",
-          icon: "/images/txt.png",
+          name: "GitHub - sbn-circuito-inscricoes",
+          icon: "/images/github.png",
           kind: "file",
-          fileType: "txt",
+          fileType: "url",
+          href: "https://github.com/Gabriel-Vignoli/sbn-circuito-inscricoes",
           position: "top-5 right-10",
-          description: [
-            "Sistema de inscrições para o 2º Circuito SBN Original, uma corrida com centenas de participantes.",
-            "Em vez de formulários em papel, os corredores se inscrevem online com confirmação automática e acompanhamento em tempo real.",
-            "Conta com formulário público, página de sucesso e um dashboard administrativo protegido para gerenciar inscrições e envio de confirmações via WhatsApp.",
-            "Construído com Next.js 16, Prisma 7, PostgreSQL (Neon) e validação com Zod v4, com deploy na Vercel.",
-          ],
         },
         {
           id: 2,
@@ -370,7 +360,7 @@ const WORK_LOCATION = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/gabrielvignoli/sbn-circuito-inscricoes",
+          href: "https://github.com/Gabriel-Vignoli/sbn-circuito-inscricoes",
           position: "top-20 left-20",
         },
         {
@@ -396,17 +386,12 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Carijó Project.txt",
-          icon: "/images/txt.png",
+          name: "GitHub - carijo",
+          icon: "/images/github.png",
           kind: "file",
-          fileType: "txt",
+          fileType: "url",
+          href: "https://github.com/Gabriel-Vignoli/restaurante-carijo",
           position: "top-5 left-10",
-          description: [
-            "Landing page freelance para o Restaurante e Lanchonete Carijó, criada para apresentar o cardápio e atrair clientes online.",
-            "Em vez de depender apenas do boca a boca, o restaurante ganhou presença digital moderna com visual atrativo e navegação fluida.",
-            "Pense nisso como um cardápio interativo disponível a qualquer hora, direto do celular do cliente.",
-            "Construído com HTML, CSS, JavaScript, GSAP e Three.js, com deploy na Netlify.",
-          ],
         },
         {
           id: 2,
@@ -434,7 +419,7 @@ const WORK_LOCATION = {
 const ABOUT_LOCATION = {
   id: 2,
   type: "about",
-  name: "About me",
+  name: "Sobre",
   icon: "/icons/info.svg",
   kind: "folder",
   children: [
@@ -487,7 +472,7 @@ const ABOUT_LOCATION = {
 const RESUME_LOCATION = {
   id: 3,
   type: "resume",
-  name: "Resume",
+  name: "Curriculo",
   icon: "/icons/file.svg",
   kind: "folder",
   children: [
@@ -505,7 +490,7 @@ const RESUME_LOCATION = {
 const TRASH_LOCATION = {
   id: 4,
   type: "trash",
-  name: "Trash",
+  name: "Lixeira",
   icon: "/icons/trash.svg",
   kind: "folder",
   children: [],
