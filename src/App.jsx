@@ -9,6 +9,7 @@ import Safari from "./components/windows/safari";
 import Resume from "./components/windows/resume";
 import Finder from "./components/windows/finder";
 import Text from "./components/windows/text";
+import Image from "./components/windows/image";
 gsap.registerPlugin(Draggable);
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
       <Resume></Resume>
       <Finder></Finder>
       <Text></Text>
+      <Image></Image>
     </main>
   );
 };

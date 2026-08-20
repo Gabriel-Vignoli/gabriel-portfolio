@@ -425,12 +425,12 @@ const ABOUT_LOCATION = {
   children: [
     {
       id: 1,
-      name: "gabriel.png",
+      name: "gabriel.jpeg",
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
       position: "top-10 left-5",
-      imageUrl: "/images/gabriel.jpg",
+      imageUrl: "/images/gabriel.jpeg",
     },
     {
       id: 2,
