@@ -503,4 +503,37 @@ export const locations = {
   trash: TRASH_LOCATION,
 };
 
+const socials = [
+  {
+    id: 1,
+    text: "GitHub",
+    icon: "/icons/github.svg",
+    bg: "#333333",
+    link: "https://github.com/Gabriel-Vignoli",
+  },
+  {
+    id: 2,
+    text: "LinkedIn",
+    icon: "/icons/linkedin.svg",
+    bg: "#05b6f6",
+    link: "https://www.linkedin.com/in/gabriel-vignoli/",
+  },
+  {
+    id: 3,
+    text: "Instagram",
+    icon: "/icons/instagram.svg",
+    bg: "#e1306c",
+    link: "https://www.instagram.com/gabriel_vignolii/",
+  },
+  {
+    id: 4,
+    text: "Email",
+    icon: "/icons/email.svg",
+    bg: "#f4656b",
+    link: "mailto:pessoalvignoli123@gmail.com",
+  },
+];
+
+export { socials };
+
 export { navLinks, navIcons, dockApps, INITIAL_Z_INDEX, WINDOW_CONFIG, techStack, courses };
