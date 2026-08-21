@@ -37,9 +37,9 @@ const dockApps = [
     canOpen: true,
   },
   {
-    id: "photos",
+    id: "resume",
     name: "Curriculo",
-    icon: "photos.png",
+    icon: "resume.png",
     canOpen: true,
   },
   {
