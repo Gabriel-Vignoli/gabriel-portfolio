@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { navIcons, navLinks } from "../constants";
 import useWindowStore from "../store/window";
+import ThemeSwitcher from "./themeSwitcher";
 
 dayjs.locale("pt-br");
 
@@ -31,8 +32,7 @@ const Navbar = () => {
     <nav>
       <div>
         <img src="/images/logo.svg" alt="Logo" />
-        <p className="font-bold">Gabriel's Portfolio</p>
-
+<p className="font-bold text-black dark:text-white">Gabriel's Portfolio</p>
         <ul>
           {navLinks.map(({ id, name, type }) => (
             <li key={id} onClick={() => toggleWindow(type)}>
@@ -44,11 +44,16 @@ const Navbar = () => {
 
       <div>
         <ul>
-          {navIcons.map(({ id, img }) => (
-            <li key={id}>
-              <img src={img} alt={`Icon ${id}`} className="icon-hover" />
-            </li>
-          ))}
+          {navIcons
+            .filter(({ img }) => !img.includes("mode"))
+            .map(({ id, img }) => (
+              <li key={id}>
+                <img src={img} alt={`Icon ${id}`} className="icon-hover" />
+              </li>
+            ))}
+          <li>
+            <ThemeSwitcher />
+          </li>
         </ul>
 
         <time>{formattedDate}</time>
