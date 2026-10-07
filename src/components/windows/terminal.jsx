@@ -39,7 +39,7 @@ const Terminal = () => {
         <div className="footnote">
             <p>
                 <Check size={20}></Check>
-                5 de 5 skills carregadas com sucesso (100%) 
+                6 de 6 skills carregadas com sucesso (100%) 
             </p>
 
             <p className="text-black">
