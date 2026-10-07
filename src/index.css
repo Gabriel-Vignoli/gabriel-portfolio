@@ -91,6 +91,9 @@ body {
     @apply p-1 hover:bg-gray-200 dark:hover:bg-white/10 rounded hover:cursor-default;
   }
 
+  .mode-toggle {
+  @apply p-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:bg-gray-200 dark:hover:bg-white/10 hover:scale-110 hover:rotate-12 active:scale-95;
+}
   .theme-menu {
     @apply absolute top-full right-0 mt-2 w-40 bg-white dark:bg-black/80 backdrop-blur-xl rounded-xl p-1.5 shadow-2xl z-50 flex flex-col items-stretch gap-1 border border-gray-200 dark:border-transparent;
     .theme-menu-item {

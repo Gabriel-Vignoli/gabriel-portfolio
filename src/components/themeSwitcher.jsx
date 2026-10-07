@@ -36,7 +36,7 @@ const ThemeSwitcher = () => {
       <img
         src={isDark ? "/icons/mode-white.svg" : "/icons/mode.svg"}
         alt="Theme"
-        className="icon-hover cursor-pointer"
+        className="mode-toggle"
         onClick={() => setOpen((prev) => !prev)}
       />
       {open && (
