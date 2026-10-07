@@ -8,18 +8,22 @@ const navIcons = [
   {
     id: 1,
     img: "/icons/wifi.svg",
+    darkImg: "/icons/wifi-white.svg",
   },
   {
     id: 2,
     img: "/icons/search.svg",
+    darkImg: "/icons/search-white.svg",
   },
   {
     id: 3,
     img: "/icons/user.svg",
+    darkImg: "/icons/user-white.svg",
   },
   {
     id: 4,
     img: "/icons/mode.svg",
+    darkImg: "/icons/mode-white.svg",
   },
 ];
 

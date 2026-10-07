@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { navIcons, navLinks } from "../constants";
 import useWindowStore from "../store/window";
+import useThemeStore from "../store/theme";
 import ThemeSwitcher from "./themeSwitcher";
 
 dayjs.locale("pt-br");
@@ -18,6 +19,12 @@ const Navbar = () => {
   const formattedDate = `${weekday}, ${day} de ${month} às ${time}`;
 
   const { openWindow, closeWindow, window: windows } = useWindowStore();
+  const { theme } = useThemeStore();
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const toggleWindow = (type) => {
     const win = windows[type];
@@ -31,8 +38,10 @@ const Navbar = () => {
   return (
     <nav>
       <div>
-        <img src="/images/logo.svg" alt="Logo" />
-<p className="font-bold text-black dark:text-white">Gabriel's Portfolio</p>
+        <img src={isDark ? "/images/logo-white.svg" : "/images/logo.svg"} alt="Logo" />
+        <p className="font-bold text-black dark:text-white">
+          Gabriel's Portfolio
+        </p>
         <ul>
           {navLinks.map(({ id, name, type }) => (
             <li key={id} onClick={() => toggleWindow(type)}>
@@ -46,9 +55,13 @@ const Navbar = () => {
         <ul>
           {navIcons
             .filter(({ img }) => !img.includes("mode"))
-            .map(({ id, img }) => (
+            .map(({ id, img, darkImg }) => (
               <li key={id}>
-                <img src={img} alt={`Icon ${id}`} className="icon-hover" />
+                <img
+                  src={isDark ? darkImg : img}
+                  alt={`Icon ${id}`}
+                  className="icon-hover"
+                />
               </li>
             ))}
           <li>

@@ -14,6 +14,11 @@ const ThemeSwitcher = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
@@ -26,8 +31,9 @@ const ThemeSwitcher = () => {
   }, []);
 
   return (
-<div ref={ref} className="relative isolate">      <img
-        src="/icons/mode.svg"
+    <li ref={ref} className="relative isolate flex-none">
+      <img
+        src={isDark ? "/icons/mode-white.svg" : "/icons/mode.svg"}
         alt="Theme"
         className="icon-hover cursor-pointer"
         onClick={() => setOpen((prev) => !prev)}
@@ -40,8 +46,6 @@ const ThemeSwitcher = () => {
               key={id}
               className={clsx("theme-menu-item", theme === id && "active")}
               onClick={() => {
-                  console.log("Setting theme to:", id);
-
                 setTheme(id);
                 setOpen(false);
               }}
@@ -52,7 +56,7 @@ const ThemeSwitcher = () => {
           ))}
         </ul>
       )}
-    </div>
+    </li>
   );
 };
 
