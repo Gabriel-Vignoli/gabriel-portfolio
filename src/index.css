@@ -39,30 +39,11 @@ body {
   }
 
   nav {
-  @apply relative z-[9999] flex justify-between items-center bg-white/50 dark:bg-black/40 backdrop-blur-3xl p-2 px-5 select-none;
+    @apply relative z-[9999] flex justify-between items-center bg-white/50 dark:bg-black/40 backdrop-blur-3xl p-2 px-5 select-none pointer-events-none;
 
-  div {
-    @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
-
-    &:last-child {
-      @apply max-sm:hidden;
+    > * {
+      @apply pointer-events-auto;
     }
-  }
-
-  ul {
-    @apply flex items-center gap-5 max-sm:hidden;
-
-    p {
-      @apply text-sm cursor-pointer hover:underline transition-all text-black dark:text-white;
-    }
-  }
-
-  time {
-    @apply text-sm font-medium text-black dark:text-white;
-  }
-}
-  nav {
-    @apply flex justify-between items-center bg-white/50 dark:bg-black/40 backdrop-blur-3xl p-2 px-5 select-none;
 
     div {
       @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
@@ -92,10 +73,12 @@ body {
   }
 
   .mode-toggle {
-  @apply p-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:bg-gray-200 dark:hover:bg-white/10 hover:scale-110 hover:rotate-12 active:scale-95;
-}
+    @apply p-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:bg-gray-200 dark:hover:bg-white/10 hover:scale-110 hover:rotate-12 active:scale-95;
+  }
+
   .theme-menu {
     @apply absolute top-full right-0 mt-2 w-40 bg-white dark:bg-black/80 backdrop-blur-xl rounded-xl p-1.5 shadow-2xl z-50 flex flex-col items-stretch gap-1 border border-gray-200 dark:border-transparent;
+
     .theme-menu-item {
       @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-white/90 cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-white/10 w-full;
 
@@ -172,7 +155,7 @@ body {
       @apply bg-white dark:bg-neutral-950 p-10 max-w-3xl mx-auto max-h-[60vh] overflow-y-auto;
 
       h2 {
-        @apply text-xl font-bold text-pink-600 dark:text-pink-400 mb-10 sticky top-0 bg-white dark:bg-neutral-950;
+        @apply text-xl font-bold text-pink-600 dark:text-pink-400 mb-10;
       }
 
       .blog-post {
@@ -440,4 +423,29 @@ body {
       }
     }
   }
+}
+
+.blog::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blog::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 9999px;
+}
+
+.dark .blog::-webkit-scrollbar-thumb {
+  background-color: #404040;
+}
+
+.blog::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+.dark .blog::-webkit-scrollbar-thumb:hover {
+  background-color: #525252;
 }
