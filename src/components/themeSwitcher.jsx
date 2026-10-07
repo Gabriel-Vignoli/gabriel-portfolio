@@ -31,14 +31,14 @@ const ThemeSwitcher = () => {
   }, []);
 
   return (
-    <li ref={ref} className="relative isolate flex-none">
+    <li ref={ref} className="relative flex-none">
+      {" "}
       <img
         src={isDark ? "/icons/mode-white.svg" : "/icons/mode.svg"}
         alt="Theme"
         className="icon-hover cursor-pointer"
         onClick={() => setOpen((prev) => !prev)}
       />
-
       {open && (
         <ul className="theme-menu">
           {OPTIONS.map(({ id, label, icon: Icon }) => (

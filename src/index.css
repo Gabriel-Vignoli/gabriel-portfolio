@@ -39,7 +39,7 @@ body {
   }
 
   nav {
-    @apply flex justify-between items-center bg-white/50 dark:bg-black/40 backdrop-blur-3xl p-2 px-5 select-none;
+    @apply relative z-[100] flex justify-between items-center bg-white/50 dark:bg-black/40 backdrop-blur-3xl p-2 px-5 select-none;
 
     div {
       @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
@@ -53,7 +53,7 @@ body {
       @apply flex items-center gap-5 max-sm:hidden;
 
       p {
-        @apply text-sm cursor-pointer hover:underline transition-all dark:text-white;
+        @apply text-sm cursor-pointer hover:underline transition-all text-black dark:text-white;
       }
     }
 
@@ -92,8 +92,7 @@ body {
   }
 
   .theme-menu {
-    @apply absolute top-full right-0 mt-2 w-40 bg-white dark:bg-black/80 backdrop-blur-xl rounded-xl p-1.5 shadow-2xl z-[999] flex flex-col items-stretch gap-1 border border-gray-200 dark:border-transparent;
-
+    @apply absolute top-full right-0 mt-2 w-40 bg-white dark:bg-black/80 backdrop-blur-xl rounded-xl p-1.5 shadow-2xl z-50 flex flex-col items-stretch gap-1 border border-gray-200 dark:border-transparent;
     .theme-menu-item {
       @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-white/90 cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-white/10 w-full;
 
