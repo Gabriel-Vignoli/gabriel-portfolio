@@ -44,7 +44,7 @@ const dockApps = [
   },
   {
     id: "contact",
-    name: "Contato", 
+    name: "Contato",
     icon: "contact.png",
     canOpen: true,
   },
@@ -78,24 +78,28 @@ const WINDOW_CONFIG = {
 const techStack = [
   {
     category: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript", "JavaScript"],
-  },
-  {
-    category: "Estilização",
-    items: ["Tailwind CSS", "BootStrap", "CSS"],
+    items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "TailwindCSS"],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "Prisma"],
+    items: ["Node.js", "APIs REST", "Express", "JWT", "NextAuth"],
   },
   {
     category: "Banco de Dados",
-    items: ["PostgreSQL", "mySQL"],
+    items: ["PostgreSQL", "MySQL", "Prisma ORM"],
   },
   {
     category: "Ferramentas",
     items: ["Git", "GitHub", "AWS"],
   },
+  {
+    category: "Design",
+    items: ["Figma", "UI/UX"],
+  },
+  {
+    category: "Idiomas",
+    items: ["Inglês (Avançado)", "Português (Nativo)"],
+  }
 ];
 
 const courses = [
@@ -536,4 +540,12 @@ const socials = [
 
 export { socials };
 
-export { navLinks, navIcons, dockApps, INITIAL_Z_INDEX, WINDOW_CONFIG, techStack, courses };
+export {
+  navLinks,
+  navIcons,
+  dockApps,
+  INITIAL_Z_INDEX,
+  WINDOW_CONFIG,
+  techStack,
+  courses,
+};
