@@ -38,7 +38,10 @@ const Navbar = () => {
   return (
     <nav>
       <div>
-        <img src={isDark ? "/images/logo-white.svg" : "/images/logo.svg"} alt="Logo" />
+        <img
+          src={isDark ? "/images/logo-white.svg" : "/images/logo.svg"}
+          alt="Logo"
+        />
         <p className="font-bold text-black dark:text-white">
           Gabriel's Portfolio
         </p>
@@ -60,7 +63,7 @@ const Navbar = () => {
                 <img
                   src={isDark ? darkImg : img}
                   alt={`Icon ${id}`}
-                  className="icon-hover"
+                  className="mode-toggle"
                 />
               </li>
             ))}
