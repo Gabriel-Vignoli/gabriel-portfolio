@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -14,16 +15,30 @@ import WindowWrapper from "../windowWrapper";
 import { courses } from "../../constants";
 
 const Safari = () => {
+  const [query, setQuery] = useState("");
+
+  const filteredCourses = courses.filter(({ category, title }) => {
+    const search = query.trim().toLowerCase();
+    if (!search) return true;
+
+    return (
+      category.toLowerCase().includes(search) ||
+      title.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <>
       <div id="window-header">
-        <WindowControls target="safari"></WindowControls>
+        <div className="drag-handle flex items-center flex-1">
+          <WindowControls target="safari"></WindowControls>
 
-        <PanelLeft className="ml-10 icon"></PanelLeft>
+          <PanelLeft className="ml-10 icon"></PanelLeft>
 
-        <div className="flex items-center gap-1 ml-5">
-          <ChevronLeft className="icon"></ChevronLeft>
-          <ChevronRight className="icon"></ChevronRight>
+          <div className="flex items-center gap-1 ml-5">
+            <ChevronLeft className="icon"></ChevronLeft>
+            <ChevronRight className="icon"></ChevronRight>
+          </div>
         </div>
 
         <div className="flex-1 flex-center gap-3">
@@ -34,6 +49,8 @@ const Safari = () => {
 
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Busque pela categoria do certificado(Front, Inglês)"
               className="flex-1"
             />
@@ -51,22 +68,28 @@ const Safari = () => {
         <h2>Meus certificados</h2>
 
         <div className="space-y-8">
-          {courses.map((course) => (
-            <div key={course.id} className="blog-post">
-              <img src={course.imageURL} alt={course.title} />
+          {filteredCourses.length === 0 ? (
+            <p className="text-sm text-gray-500 dark:text-neutral-400 text-center py-10">
+              Nenhum certificado encontrado para "{query}".
+            </p>
+          ) : (
+            filteredCourses.map((course) => (
+              <div key={course.id} className="blog-post">
+                <img src={course.imageURL} alt={course.title} />
 
-              <div className="content">
-                <span className="category">{course.category}</span>
-                <h3>{course.title}</h3>
-                <p>
-                  {course.issuer} · {course.date}
-                </p>
-                <a href={course.link} target="_blank" rel="noopener noreferrer">
-                  Ver certificado <MoveRight className="icon-hover" size={14} />
-                </a>
+                <div className="content">
+                  <span className="category">{course.category}</span>
+                  <h3>{course.title}</h3>
+                  <p>
+                    {course.issuer} · {course.date}
+                  </p>
+                  <a href={course.link} target="_blank" rel="noopener noreferrer">
+                    Ver certificado <MoveRight className="icon-hover" size={14} />
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </>
