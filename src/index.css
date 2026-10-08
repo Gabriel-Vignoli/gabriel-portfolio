@@ -80,28 +80,28 @@ body {
   }
 
   #status-bar {
-  @apply grid lg:hidden grid-cols-3 items-center relative z-[9999] px-6 pt-3 pb-2 text-white select-none pointer-events-none;
+    @apply grid lg:hidden grid-cols-3 items-center relative z-[9999] px-6 pt-3 pb-2 md:px-10 md:pt-4 md:pb-3 text-white select-none pointer-events-none;
 
-  time {
-    @apply text-sm font-semibold drop-shadow-md;
-  }
-
-  .island {
-    @apply mx-auto h-8 w-28 rounded-full bg-black;
-  }
-
-  .status-icons {
-    @apply flex items-center justify-end gap-2 drop-shadow-md;
-
-    img {
-      @apply size-4;
+    time {
+      @apply text-sm md:text-base font-semibold drop-shadow-md;
     }
 
-    svg {
-      @apply size-5;
+    .island {
+      @apply mx-auto h-8 w-28 md:h-10 md:w-36 rounded-full bg-black;
+    }
+
+    .status-icons {
+      @apply flex items-center justify-end gap-2 md:gap-3 drop-shadow-md;
+
+      img {
+        @apply size-4 md:size-5;
+      }
+
+      svg {
+        @apply size-5 md:size-6;
+      }
     }
   }
-}
 
   .theme-menu {
     @apply absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 bg-white dark:bg-black/80 backdrop-blur-xl rounded-xl p-1.5 shadow-2xl z-50 flex flex-col items-stretch gap-1 border border-gray-200 dark:border-transparent;
