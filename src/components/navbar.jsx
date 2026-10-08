@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import { BatteryFull } from "lucide-react";
 import { navIcons, navLinks } from "../constants";
 import useWindowStore from "../store/window";
 import useThemeStore from "../store/theme";
@@ -36,45 +37,60 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
-      <div>
-        <img
-          src={isDark ? "/images/logo-white.svg" : "/images/logo.svg"}
-          alt="Logo"
-        />
-        <p className="font-bold text-black dark:text-white">
-          Gabriel's Portfolio
-        </p>
-        <ul>
-          {navLinks.map(({ id, name, type }) => (
-            <li key={id} onClick={() => toggleWindow(type)}>
-              <p>{name}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <ul>
-          {navIcons
-            .filter(({ img }) => !img.includes("mode"))
-            .map(({ id, img, darkImg }) => (
-              <li key={id}>
-                <img
-                  src={isDark ? darkImg : img}
-                  alt={`Icon ${id}`}
-                  className="mode-toggle"
-                />
+    <>
+      {/* Desktop navbar */}
+      <nav className="max-lg:hidden">
+        <div>
+          <img
+            src={isDark ? "/images/logo-white.svg" : "/images/logo.svg"}
+            alt="Logo"
+          />
+          <p className="font-bold text-black dark:text-white">
+            Gabriel's Portfolio
+          </p>
+          <ul>
+            {navLinks.map(({ id, name, type }) => (
+              <li key={id} onClick={() => toggleWindow(type)}>
+                <p>{name}</p>
               </li>
             ))}
-          <li>
-            <ThemeSwitcher />
-          </li>
-        </ul>
+          </ul>
+        </div>
 
-        <time>{formattedDate}</time>
-      </div>
-    </nav>
+        <div>
+          <ul>
+            {navIcons
+              .filter(({ img }) => !img.includes("mode"))
+              .map(({ id, img, darkImg }) => (
+                <li key={id}>
+                  <img
+                    src={isDark ? darkImg : img}
+                    alt={`Icon ${id}`}
+                    className="mode-toggle"
+                  />
+                </li>
+              ))}
+            <li>
+              <ThemeSwitcher />
+            </li>
+          </ul>
+
+          <time>{formattedDate}</time>
+        </div>
+      </nav>
+
+      {/* Mobile and tablet status bar */}
+      <header id="status-bar">
+        <time>{time}</time>
+
+        <div className="island" aria-hidden="true" />
+
+        <div className="status-icons">
+          <img src="/icons/wifi-white.svg" alt="Wi-Fi" />
+          <BatteryFull />
+        </div>
+      </header>
+    </>
   );
 };
 
