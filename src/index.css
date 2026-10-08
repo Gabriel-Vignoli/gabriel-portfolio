@@ -128,18 +128,18 @@ body {
   }
 
   #dock {
-    @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:w-[calc(100%-2rem)];
+    @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-lg:w-[calc(100%-2rem)] max-lg:max-w-md;
 
     .dock-container {
-      @apply bg-white/20 dark:bg-black/30 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5 max-sm:w-full max-sm:items-center max-sm:justify-around max-sm:rounded-[2rem] max-sm:p-3 max-sm:gap-0;
+      @apply bg-white/20 dark:bg-black/30 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5 max-lg:w-full max-lg:items-center max-lg:justify-around max-lg:rounded-[2rem] max-lg:p-3 max-lg:gap-0;
     }
 
     .tooltip {
-      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl max-sm:!hidden;
+      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl max-lg:!hidden;
     }
 
     .dock-icon {
-      @apply size-14 3xl:size-20 max-sm:size-16 cursor-pointer;
+      @apply size-14 3xl:size-20 max-lg:size-16 cursor-pointer;
 
       img {
         @apply object-cover object-center;
