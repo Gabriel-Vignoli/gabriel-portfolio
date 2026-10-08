@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useWindowStore from "../store/window";
+import clsx from "clsx";
 
 const Dock = () => {
   const { openWindow, closeWindow, window: windows } = useWindowStore();
@@ -66,14 +67,22 @@ const Dock = () => {
       openWindow(app.id);
     }
 
-    console.log(windows)
+    console.log(windows);
   };
+
+  const HIDDEN_ON_SMALL = ["terminal", "trash"];
 
   return (
     <section id="dock">
       <div ref={dockRef} className="dock-container">
         {dockApps.map(({ id, name, icon, canOpen }) => (
-          <div key={id} className="relative flex justify-center">
+          <div
+            key={id}
+            className={clsx(
+              "relative justify-center",
+              HIDDEN_ON_SMALL.includes(id) ? "hidden lg:flex" : "flex",
+            )}
+          >
             <button
               type="button"
               className="dock-icon"
