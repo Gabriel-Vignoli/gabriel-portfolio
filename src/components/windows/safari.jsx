@@ -30,39 +30,42 @@ const Safari = () => {
   return (
     <>
       <div id="window-header">
-        <div className="drag-handle flex items-center flex-1">
-          <WindowControls target="safari"></WindowControls>
+  {/* left: draggable */}
+  <div className="drag-handle flex items-center flex-1">
+    <WindowControls target="safari"></WindowControls>
 
-          <PanelLeft className="ml-10 icon"></PanelLeft>
+    <PanelLeft className="ml-10 icon"></PanelLeft>
 
-          <div className="flex items-center gap-1 ml-5">
-            <ChevronLeft className="icon"></ChevronLeft>
-            <ChevronRight className="icon"></ChevronRight>
-          </div>
-        </div>
+    <div className="flex items-center gap-1 ml-5">
+      <ChevronLeft className="icon"></ChevronLeft>
+      <ChevronRight className="icon"></ChevronRight>
+    </div>
+  </div>
 
-        <div className="flex-1 flex-center gap-3">
-          <ShieldHalf className="icon"></ShieldHalf>
+  {/* middle: NOT draggable (shield + search) */}
+  <div className="flex items-center gap-3 w-1/2">
+    <ShieldHalf className="icon"></ShieldHalf>
 
-          <div className="search">
-            <Search className="icon"></Search>
+    <div className="search">
+      <Search className="icon"></Search>
 
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Busque pela categoria do certificado(Front, Inglês)"
-              className="flex-1"
-            />
-          </div>
-        </div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Busque pela categoria do certificado(Front, Inglês)"
+        className="flex-1"
+      />
+    </div>
+  </div>
 
-        <div className="flex items-center gap-5">
-          <Share className="icon"></Share>
-          <Plus className="icon"></Plus>
-          <Copy className="icon"></Copy>
-        </div>
-      </div>
+  {/* right: draggable */}
+  <div className="drag-handle flex items-center justify-end gap-5 flex-1">
+    <Share className="icon"></Share>
+    <Plus className="icon"></Plus>
+    <Copy className="icon"></Copy>
+  </div>
+</div>
 
       <div className="blog">
         <h2>Meus certificados</h2>

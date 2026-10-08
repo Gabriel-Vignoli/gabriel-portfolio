@@ -147,7 +147,7 @@ body {
     @apply w-4xl absolute top-40 left-2/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     .search {
-      @apply flex items-center gap-3 w-2/3 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-lg px-3 py-2 transition-colors focus-within:border-blue-400 dark:focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-500/20;
+      @apply flex items-center gap-3 flex-1 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-lg px-3 py-2 transition-colors focus-within:border-blue-400 dark:focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-500/20;
 
       input {
         @apply placeholder:text-gray-400 dark:text-white dark:placeholder:text-neutral-500 outline-none;

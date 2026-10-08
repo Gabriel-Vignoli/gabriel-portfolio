@@ -39,15 +39,31 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if (!el) return;
 
-      const dragHandle = el.querySelector(".drag-handle");
-      const header = el.querySelector("#window-header");
+      const handles = el.querySelectorAll(".drag-handle");
 
-      const draggable = Draggable.create(el, {
-        trigger: dragHandle || header || el,
-        onPress: () => focusWindow(windowKey),
-      });
+      // Windows without a .drag-handle keep the old behavior
+      if (!handles.length) {
+        const header = el.querySelector("#window-header");
+        const draggable = Draggable.create(el, {
+          trigger: header || el,
+          onPress: () => focusWindow(windowKey),
+        });
+        return () => draggable[0]?.kill();
+      }
 
-      return () => draggable[0]?.kill();
+      // One Draggable per handle, each moving the real window via a proxy
+      const instances = Array.from(handles).map(
+        (handle) =>
+          Draggable.create(document.createElement("div"), {
+            trigger: handle,
+            onPress: () => focusWindow(windowKey),
+            onDrag: function () {
+              gsap.set(el, { x: `+=${this.deltaX}`, y: `+=${this.deltaY}` });
+            },
+          })[0],
+      );
+
+      return () => instances.forEach((d) => d.kill());
     }, []);
 
     return (
