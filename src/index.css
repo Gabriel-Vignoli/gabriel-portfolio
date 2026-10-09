@@ -168,7 +168,7 @@ body {
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-40 left-2/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-full max-sm:h-dvh max-sm:rounded-none;
 
     .search {
       @apply flex items-center gap-3 flex-1 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-lg px-3 py-2 transition-colors focus-within:border-blue-400 dark:focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-500/20;
@@ -363,8 +363,8 @@ body {
     }
   }
 
- #finder {
-  @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-full max-sm:h-dvh max-sm:rounded-none;
+  #finder {
+    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-full max-sm:h-dvh max-sm:rounded-none;
 
     .sidebar {
       @apply w-48 bg-gray-50 dark:bg-neutral-900 border-r border-gray-200 dark:border-neutral-800 flex flex-col p-5 space-y-3;
