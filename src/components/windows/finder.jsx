@@ -121,20 +121,22 @@ const Finder = () => {
             Esta pasta está vazia.
           </p>
         ) : (
-          <div className="grid grid-cols-3 gap-y-6 px-4 pt-8 overflow-y-auto">
+          <div className="grid grid-cols-3 gap-y-5 px-4 pt-6 overflow-y-auto">
             {mobileItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => openMobileItem(item)}
-                className="flex flex-col items-center gap-2"
+                className="flex flex-col items-center gap-1.5"
               >
                 <img
-                  src={item.kind === "folder" ? "/images/folder.png" : item.icon}
+                  src={
+                    item.kind === "folder" ? "/images/folder.png" : item.icon
+                  }
                   alt={item.name}
-                  className="size-20 object-contain"
+                  className="size-14 object-contain"
                 />
-                <p className="w-24 text-xs font-semibold text-center text-gray-900 dark:text-white line-clamp-2">
+                <p className="w-20 text-[11px] font-semibold text-center text-gray-900 dark:text-white line-clamp-2">
                   {item.name}
                 </p>
               </button>
