@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import WindowControls from "../windowControls";
 import WindowWrapper from "../windowWrapper";
 import { locations } from "../../constants";
@@ -114,6 +114,36 @@ const Finder = () => {
           <h2 className="max-w-[45%] truncate text-lg text-gray-900 dark:text-white">
             {mobileTitle}
           </h2>
+        </div>
+
+        {/* Breadcrumb */}
+        <div
+          aria-label="Navegação"
+          className="flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-gray-100 dark:bg-neutral-800 px-4 py-3 text-sm"
+        >
+          <button
+            type="button"
+            onClick={() => setPath([])}
+            className="text-blue-500 shrink-0"
+          >
+            Portfólio
+          </button>
+
+          {path.map((item, index) => (
+            <span key={item.id} className="flex items-center gap-2 shrink-0">
+              <ChevronRight
+                size={14}
+                className="text-gray-500 dark:text-neutral-400"
+              />
+              <button
+                type="button"
+                onClick={() => setPath((prev) => prev.slice(0, index + 1))}
+                className="max-w-[9rem] truncate text-blue-500"
+              >
+                {item.name}
+              </button>
+            </span>
+          ))}
         </div>
 
         {mobileItems.length === 0 ? (
