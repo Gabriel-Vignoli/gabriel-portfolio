@@ -262,7 +262,7 @@ body {
   }
 
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-2xl absolute top-60 left-5/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-full max-sm:max-w-none max-sm:h-dvh max-sm:rounded-none;
 
     h2 {
       @apply font-bold text-sm text-center w-full dark:text-white;
