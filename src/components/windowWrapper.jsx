@@ -39,63 +39,66 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if (!el) return;
 
-      // No dragging on phones: windows are full screen there
-      if (window.matchMedia("(max-width: 639px)").matches) return;
+      const mm = gsap.matchMedia();
 
-      const handles = el.querySelectorAll(".drag-handle");
+      // Dragging only exists on tablet and desktop (windows are full screen on phones)
+      mm.add("(min-width: 640px)", () => {
+        const handles = el.querySelectorAll(".drag-handle");
 
-      // Windows without a .drag-handle drag from their whole header
-      if (!handles.length) {
-        const header = el.querySelector("#window-header");
-        const draggable = Draggable.create(el, {
-          trigger: header || el,
-          dragClickables: false,
-          onPress: () => focusWindow(windowKey),
-        });
-        return () => draggable[0]?.kill();
-      }
-
-      // Windows with .drag-handle (Safari): plain pointer events
-      const cleanups = Array.from(handles).map((handle) => {
-        let startX = 0;
-        let startY = 0;
-        let originX = 0;
-        let originY = 0;
-
-        const onMove = (e) => {
-          gsap.set(el, {
-            x: originX + (e.clientX - startX),
-            y: originY + (e.clientY - startY),
+        // Windows without a .drag-handle drag from their whole header
+        if (!handles.length) {
+          const header = el.querySelector("#window-header");
+          const draggable = Draggable.create(el, {
+            trigger: header || el,
+            onPress: () => focusWindow(windowKey),
           });
-        };
+          return () => draggable[0]?.kill();
+        }
 
-        const onUp = () => {
-          window.removeEventListener("pointermove", onMove);
-          window.removeEventListener("pointerup", onUp);
-        };
+        // Windows with .drag-handle (Safari): plain pointer events
+        const cleanups = Array.from(handles).map((handle) => {
+          let startX = 0;
+          let startY = 0;
+          let originX = 0;
+          let originY = 0;
 
-        const onDown = (e) => {
-          if (e.button !== 0) return;
-          focusWindow(windowKey);
+          const onMove = (e) => {
+            gsap.set(el, {
+              x: originX + (e.clientX - startX),
+              y: originY + (e.clientY - startY),
+            });
+          };
 
-          startX = e.clientX;
-          startY = e.clientY;
-          originX = gsap.getProperty(el, "x");
-          originY = gsap.getProperty(el, "y");
+          const onUp = () => {
+            window.removeEventListener("pointermove", onMove);
+            window.removeEventListener("pointerup", onUp);
+          };
 
-          window.addEventListener("pointermove", onMove);
-          window.addEventListener("pointerup", onUp);
-        };
+          const onDown = (e) => {
+            if (e.button !== 0) return;
+            focusWindow(windowKey);
 
-        handle.addEventListener("pointerdown", onDown);
+            startX = e.clientX;
+            startY = e.clientY;
+            originX = gsap.getProperty(el, "x");
+            originY = gsap.getProperty(el, "y");
 
-        return () => {
-          handle.removeEventListener("pointerdown", onDown);
-          onUp();
-        };
+            window.addEventListener("pointermove", onMove);
+            window.addEventListener("pointerup", onUp);
+          };
+
+          handle.addEventListener("pointerdown", onDown);
+
+          return () => {
+            handle.removeEventListener("pointerdown", onDown);
+            onUp();
+          };
+        });
+
+        return () => cleanups.forEach((fn) => fn());
       });
 
-      return () => cleanups.forEach((fn) => fn());
+      return () => mm.revert();
     }, []);
 
     return (
