@@ -39,31 +39,63 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if (!el) return;
 
+      // No dragging on phones: windows are full screen there
+      if (window.matchMedia("(max-width: 639px)").matches) return;
+
       const handles = el.querySelectorAll(".drag-handle");
 
-      // Windows without a .drag-handle keep the old behavior
+      // Windows without a .drag-handle drag from their whole header
       if (!handles.length) {
         const header = el.querySelector("#window-header");
         const draggable = Draggable.create(el, {
           trigger: header || el,
+          dragClickables: false,
           onPress: () => focusWindow(windowKey),
         });
         return () => draggable[0]?.kill();
       }
 
-      // One Draggable per handle, each moving the real window via a proxy
-      const instances = Array.from(handles).map(
-        (handle) =>
-          Draggable.create(document.createElement("div"), {
-            trigger: handle,
-            onPress: () => focusWindow(windowKey),
-            onDrag: function () {
-              gsap.set(el, { x: `+=${this.deltaX}`, y: `+=${this.deltaY}` });
-            },
-          })[0],
-      );
+      // Windows with .drag-handle (Safari): plain pointer events
+      const cleanups = Array.from(handles).map((handle) => {
+        let startX = 0;
+        let startY = 0;
+        let originX = 0;
+        let originY = 0;
 
-      return () => instances.forEach((d) => d.kill());
+        const onMove = (e) => {
+          gsap.set(el, {
+            x: originX + (e.clientX - startX),
+            y: originY + (e.clientY - startY),
+          });
+        };
+
+        const onUp = () => {
+          window.removeEventListener("pointermove", onMove);
+          window.removeEventListener("pointerup", onUp);
+        };
+
+        const onDown = (e) => {
+          if (e.button !== 0) return;
+          focusWindow(windowKey);
+
+          startX = e.clientX;
+          startY = e.clientY;
+          originX = gsap.getProperty(el, "x");
+          originY = gsap.getProperty(el, "y");
+
+          window.addEventListener("pointermove", onMove);
+          window.addEventListener("pointerup", onUp);
+        };
+
+        handle.addEventListener("pointerdown", onDown);
+
+        return () => {
+          handle.removeEventListener("pointerdown", onDown);
+          onUp();
+        };
+      });
+
+      return () => cleanups.forEach((fn) => fn());
     }, []);
 
     return (
@@ -72,6 +104,7 @@ const WindowWrapper = (Component, windowKey) => {
         ref={ref}
         style={{ zIndex, display: "none" }}
         className="absolute"
+        onMouseDown={() => focusWindow(windowKey)}
       >
         <Component {...props}></Component>
       </section>
