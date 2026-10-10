@@ -2,10 +2,10 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
-import { flushSync } from "react-dom";
 import { ChevronLeft, Download, Minus, Plus } from "lucide-react";
 import WindowControls from "../windowControls";
 import WindowWrapper from "../windowWrapper";
@@ -22,9 +22,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const PDF_PATH = "/files/curriculo.pdf";
 const MIN_ZOOM = 1; // 100%
-const MAX_ZOOM = 2; // 200%
+const MAX_ZOOM = 1.5; // 150%
 const ZOOM_STEP = 0.1; // 10%
-const DOUBLE_TAP_ZOOM = 1.5; // 150%
+const DOUBLE_TAP_ZOOM = 1.3; // 130%
 
 const clamp = (value) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, value));
 
@@ -52,46 +52,41 @@ const Resume = () => {
 
   const scrollRef = useRef(null);
   const contentRef = useRef(null);
-  const pendingScroll = useRef(null);
 
   const [baseWidth, setBaseWidth] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [numPages, setNumPages] = useState(1);
 
-  // Always holds the latest zoom, so touch handlers never read stale state
-  const zoomRef = useRef(1);
+  const zoomRef = useRef(1); // latest zoom, for touch handlers
+  const prevZoom = useRef(1); // zoom before the last change
+  const focalRef = useRef(null); // point of the viewport to keep in place
 
-  // Declared before the scroll-restoring effect so it runs first
-  useLayoutEffect(() => {
-    zoomRef.current = zoom;
-  }, [zoom]);
-
-  // Zoom to `newZoom`, keeping the point (fx, fy) of the viewport in place
-  const applyZoom = useCallback((newZoom, fx, fy) => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const target = snap(newZoom);
-    const ratio = target / zoomRef.current;
-    if (Math.abs(ratio - 1) < 0.001) return;
-
-    pendingScroll.current = {
-      left: (el.scrollLeft + fx) * ratio - fx,
-      top: (el.scrollTop + fy) * ratio - fy,
-    };
-
-    flushSync(() => setZoom(target));
+  // `next` is a number or a function (current zoom) => new zoom
+  const changeZoom = useCallback((next, fx, fy) => {
+    focalRef.current = { fx, fy };
+    setZoom((current) =>
+      snap(typeof next === "function" ? next(current) : next),
+    );
   }, []);
 
-  // After the new size is in the DOM, restore the scroll position
+  // Runs after every zoom change, before the browser paints
   useLayoutEffect(() => {
-    const el = scrollRef.current;
-    const pending = pendingScroll.current;
-    if (!el || !pending) return;
+    const prev = prevZoom.current;
+    prevZoom.current = zoom;
+    zoomRef.current = zoom;
 
-    el.scrollLeft = pending.left;
-    el.scrollTop = pending.top;
-    pendingScroll.current = null;
+    const el = scrollRef.current;
+    if (!el || prev === zoom) return;
+
+    const { fx, fy } = focalRef.current ?? {
+      fx: el.clientWidth / 2,
+      fy: el.clientHeight / 2,
+    };
+    focalRef.current = null;
+
+    const ratio = zoom / prev;
+    el.scrollLeft = (el.scrollLeft + fx) * ratio - fx;
+    el.scrollTop = (el.scrollTop + fy) * ratio - fy;
   }, [zoom]);
 
   // Fit the page to the screen width (minus the 12px side padding)
@@ -133,8 +128,6 @@ const Resume = () => {
           (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
         const fy =
           (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
-        const ox = el.scrollLeft + fx;
-        const oy = el.scrollTop + fy;
 
         pinch = {
           dist: distance(e.touches),
@@ -144,9 +137,7 @@ const Resume = () => {
           fy,
         };
 
-        // Scale with CSS while the fingers move (cheap),
-        // re-render the PDF once when they lift
-        content.style.transformOrigin = `${ox}px ${oy}px`;
+        content.style.transformOrigin = `${el.scrollLeft + fx}px ${el.scrollTop + fy}px`;
         content.style.willChange = "transform";
       } else if (e.touches.length === 1) {
         tapStart = {
@@ -168,25 +159,13 @@ const Resume = () => {
 
     const onTouchEnd = (e) => {
       if (pinch && e.touches.length < 2) {
-        const { newZoom, startZoom, fx, fy } = pinch;
+        const { newZoom, fx, fy } = pinch;
         pinch = null;
 
         content.style.transform = "";
         content.style.willChange = "";
 
-        // Snap the final value to a 10% step
-        const target = snap(newZoom);
-        const ratio = target / startZoom;
-
-        if (Math.abs(ratio - 1) > 0.001) {
-          const ox = el.scrollLeft + fx;
-          const oy = el.scrollTop + fy;
-          pendingScroll.current = {
-            left: ox * ratio - fx,
-            top: oy * ratio - fy,
-          };
-          flushSync(() => setZoom(target));
-        }
+        changeZoom(newZoom, fx, fy);
       }
 
       if (e.touches.length === 0) {
@@ -203,8 +182,8 @@ const Resume = () => {
           const now = Date.now();
           if (now - lastTap < 300) {
             const rect = el.getBoundingClientRect();
-            applyZoom(
-              zoomRef.current > 1.01 ? MIN_ZOOM : DOUBLE_TAP_ZOOM,
+            changeZoom(
+              (current) => (current > 1.01 ? MIN_ZOOM : DOUBLE_TAP_ZOOM),
               touch.clientX - rect.left,
               touch.clientY - rect.top,
             );
@@ -219,7 +198,6 @@ const Resume = () => {
       }
     };
 
-    // passive: false is required to call preventDefault while pinching
     el.addEventListener("touchstart", onTouchStart, { passive: false });
     el.addEventListener("touchmove", onTouchMove, { passive: false });
     el.addEventListener("touchend", onTouchEnd);
@@ -231,7 +209,48 @@ const Resume = () => {
       el.removeEventListener("touchend", onTouchEnd);
       el.removeEventListener("touchcancel", onTouchEnd);
     };
-  }, [isPhone, applyZoom]);
+  }, [isPhone, changeZoom]);
+
+  // Rendered once at the maximum size; zoom only scales it on screen.
+  // Memoized so changing zoom never re-renders react-pdf.
+  const renderWidth = baseWidth * MAX_ZOOM;
+
+  const pdfPages = useMemo(() => {
+    if (baseWidth <= 0) return null;
+
+    return (
+      <Document
+        file={PDF_PATH}
+        onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+        loading={
+          <p className="py-10 text-center text-sm text-gray-500">
+            Carregando currículo...
+          </p>
+        }
+        error={
+          <p className="py-10 text-center text-sm text-red-500">
+            Não foi possível carregar o currículo.
+          </p>
+        }
+        className="space-y-3"
+      >
+        {Array.from({ length: numPages }, (_, i) => (
+          <div
+            key={i}
+            className="mx-auto overflow-hidden rounded-lg bg-white shadow-lg"
+            style={{ width: renderWidth }}
+          >
+            <Page
+              pageNumber={i + 1}
+              width={renderWidth}
+              renderTextLayer
+              renderAnnotationLayer
+            />
+          </div>
+        ))}
+      </Document>
+    );
+  }, [baseWidth, numPages, renderWidth]);
 
   if (!isPhone) {
     return (
@@ -257,13 +276,21 @@ const Resume = () => {
     );
   }
 
-  const pageWidth = baseWidth * zoom;
-
   // Buttons zoom around the center of the screen
-  const zoomByButton = (delta) => {
+  const zoomBy = (delta) => {
     const el = scrollRef.current;
     if (!el) return;
-    applyZoom(zoomRef.current + delta, el.clientWidth / 2, el.clientHeight / 2);
+    changeZoom(
+      (current) => current + delta,
+      el.clientWidth / 2,
+      el.clientHeight / 2,
+    );
+  };
+
+  const zoomReset = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    changeZoom(MIN_ZOOM, el.clientWidth / 2, el.clientHeight / 2);
   };
 
   return (
@@ -298,48 +325,26 @@ const Resume = () => {
         style={{ touchAction: "pan-x pan-y" }}
       >
         <div ref={contentRef} className="w-max min-w-full px-3 pt-3 pb-40">
-          {baseWidth > 0 && (
-            <Document
-              file={PDF_PATH}
-              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-              loading={
-                <p className="py-10 text-center text-sm text-gray-500">
-                  Carregando currículo...
-                </p>
-              }
-              error={
-                <p className="py-10 text-center text-sm text-red-500">
-                  Não foi possível carregar o currículo.
-                </p>
-              }
-              className="space-y-3"
-            >
-              {Array.from({ length: numPages }, (_, i) => (
-                <div
-                  key={i}
-                  className="mx-auto overflow-hidden rounded-lg bg-white shadow-lg"
-                  style={{ width: pageWidth }}
-                >
-                  <Page
-                    pageNumber={i + 1}
-                    width={pageWidth}
-                    renderTextLayer
-                    renderAnnotationLayer
-                  />
-                </div>
-              ))}
-            </Document>
-          )}
+          <div style={{ zoom: zoom / MAX_ZOOM }}>{pdfPages}</div>
         </div>
       </div>
 
       {/* Zoom bar */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center rounded-full bg-black/70 p-1 text-white shadow-lg backdrop-blur-md">
+      <div
+        className="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center rounded-full bg-black/70 p-1 text-white shadow-lg backdrop-blur-md"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
         <button
           type="button"
           aria-label="Diminuir zoom"
           disabled={zoom <= MIN_ZOOM}
-          onClick={() => zoomByButton(-ZOOM_STEP)}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            zoomBy(-ZOOM_STEP);
+          }}
+          onClick={(e) => {
+            if (e.detail === 0) zoomBy(-ZOOM_STEP);
+          }}
           className="rounded-full p-2 active:bg-white/20 disabled:opacity-30"
         >
           <Minus size={16} />
@@ -348,7 +353,13 @@ const Resume = () => {
         <button
           type="button"
           aria-label="Restaurar zoom"
-          onClick={() => zoomByButton(MIN_ZOOM - zoomRef.current)}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            zoomReset();
+          }}
+          onClick={(e) => {
+            if (e.detail === 0) zoomReset();
+          }}
           className="w-14 text-center text-xs font-medium tabular-nums"
         >
           {Math.round(zoom * 100)}%
@@ -358,7 +369,13 @@ const Resume = () => {
           type="button"
           aria-label="Aumentar zoom"
           disabled={zoom >= MAX_ZOOM}
-          onClick={() => zoomByButton(ZOOM_STEP)}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            zoomBy(ZOOM_STEP);
+          }}
+          onClick={(e) => {
+            if (e.detail === 0) zoomBy(ZOOM_STEP);
+          }}
           className="rounded-full p-2 active:bg-white/20 disabled:opacity-30"
         >
           <Plus size={16} />
