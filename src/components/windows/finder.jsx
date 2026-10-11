@@ -11,7 +11,7 @@ const Finder = () => {
   const { activeLocation, setActiveLocation } = useLocationStore();
   const { openWindow, closeWindow } = useWindowStore();
 
-  // Mobile navigation: empty = root (list of locations)
+  // Phone and tablet navigation: empty = root (list of locations)
   const [path, setPath] = useState([]);
 
   const renderList = (items) =>
@@ -47,7 +47,7 @@ const Finder = () => {
     }
   };
 
-  // Mobile helpers
+  // Phone and tablet helpers
   const current = path[path.length - 1];
   const mobileTitle = current ? current.name : "Portfólio";
   const mobileItems = current ? current.children : Object.values(locations);
@@ -64,8 +64,8 @@ const Finder = () => {
 
   return (
     <>
-      {/* Desktop and tablet */}
-      <div className="max-sm:hidden">
+      {/* Desktop only */}
+      <div className="max-lg:hidden">
         <div id="window-header">
           <WindowControls target="finder"></WindowControls>
           <Search className="icon"></Search>
@@ -99,27 +99,30 @@ const Finder = () => {
         </div>
       </div>
 
-      {/* Phone */}
-      <div className="sm:hidden h-full flex flex-col bg-white dark:bg-neutral-950 pt-20">
-        <div className="relative flex items-center justify-center px-4 py-4">
+      {/* Phone and tablet */}
+      <div className="lg:hidden h-full flex flex-col bg-white dark:bg-neutral-950 pt-20 md:pt-24">
+        <div className="relative flex items-center justify-center px-4 py-4 md:px-8 md:py-5">
           <button
             type="button"
             onClick={goBack}
-            className="absolute left-4 flex items-center gap-2 text-blue-500"
+            className="absolute left-4 md:left-8 flex items-center gap-2 text-blue-500"
           >
-            <ChevronLeft size={16} className="text-gray-700 dark:text-white" />
-            <span className="text-base">Voltar</span>
+            <ChevronLeft
+              size={16}
+              className="text-gray-700 dark:text-white md:size-5"
+            />
+            <span className="text-base md:text-lg">Voltar</span>
           </button>
 
-          <h2 className="max-w-[45%] truncate text-lg text-gray-900 dark:text-white">
+          <h2 className="max-w-[45%] truncate text-lg md:text-2xl text-gray-900 dark:text-white">
             {mobileTitle}
           </h2>
         </div>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb (div, not nav, so the base nav CSS doesn't apply) */}
         <div
           aria-label="Navegação"
-          className="flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-gray-100 dark:bg-neutral-800 px-4 py-3 text-sm"
+          className="flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-gray-100 dark:bg-neutral-800 px-4 py-3 text-sm md:px-8 md:py-4 md:text-base"
         >
           <button
             type="button"
@@ -138,7 +141,7 @@ const Finder = () => {
               <button
                 type="button"
                 onClick={() => setPath((prev) => prev.slice(0, index + 1))}
-                className="max-w-[9rem] truncate text-blue-500"
+                className="max-w-[9rem] md:max-w-[16rem] truncate text-blue-500"
               >
                 {item.name}
               </button>
@@ -147,26 +150,26 @@ const Finder = () => {
         </div>
 
         {mobileItems.length === 0 ? (
-          <p className="px-6 pt-10 text-center text-sm text-gray-500 dark:text-neutral-400">
+          <p className="px-6 pt-10 text-center text-sm md:text-base text-gray-500 dark:text-neutral-400">
             Esta pasta está vazia.
           </p>
         ) : (
-          <div className="grid grid-cols-3 gap-y-5 px-4 pt-6 overflow-y-auto">
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-y-5 md:gap-y-8 px-4 md:px-8 pt-6 md:pt-10 overflow-y-auto pb-32">
             {mobileItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => openMobileItem(item)}
-                className="flex flex-col items-center gap-1.5"
+                className="flex flex-col items-center gap-1.5 md:gap-2"
               >
                 <img
                   src={
                     item.kind === "folder" ? "/images/folder.png" : item.icon
                   }
                   alt={item.name}
-                  className="size-14 object-contain"
+                  className="size-14 md:size-20 object-contain"
                 />
-                <p className="w-20 text-[11px] font-semibold text-center text-gray-900 dark:text-white line-clamp-2">
+                <p className="w-20 md:w-28 text-[11px] md:text-sm font-semibold text-center text-gray-900 dark:text-white line-clamp-2">
                   {item.name}
                 </p>
               </button>

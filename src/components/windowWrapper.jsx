@@ -41,8 +41,8 @@ const WindowWrapper = (Component, windowKey) => {
 
       const mm = gsap.matchMedia();
 
-      // Dragging only exists on tablet and desktop (windows are full screen on phones)
-      mm.add("(min-width: 640px)", () => {
+      // Dragging only exists on desktop (windows are full screen on phones and tablets)
+      mm.add("(min-width: 1024px)", () => {
         const handles = el.querySelectorAll(".drag-handle");
 
         // Windows without a .drag-handle drag from their whole header
