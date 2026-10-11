@@ -31,24 +31,25 @@ const clamp = (value) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, value));
 // Snap to 10% steps (avoids float errors like 1.2000000000000002)
 const snap = (value) => clamp(Math.round(value * 10) / 10);
 
-const useIsPhone = () => {
-  const [isPhone, setIsPhone] = useState(
-    () => window.matchMedia("(max-width: 639px)").matches,
+// Phone and tablet (below 1024px) use the full-screen layout
+const useIsCompact = () => {
+  const [isCompact, setIsCompact] = useState(
+    () => window.matchMedia("(max-width: 1023px)").matches,
   );
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 639px)");
-    const onChange = (e) => setIsPhone(e.matches);
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const onChange = (e) => setIsCompact(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  return isPhone;
+  return isCompact;
 };
 
 const Resume = () => {
   const { closeWindow } = useWindowStore();
-  const isPhone = useIsPhone();
+  const isCompact = useIsCompact();
 
   const scrollRef = useRef(null);
   const contentRef = useRef(null);
@@ -91,7 +92,7 @@ const Resume = () => {
 
   // Fit the page to the screen width (minus the 12px side padding)
   useEffect(() => {
-    if (!isPhone) return;
+    if (!isCompact) return;
     const el = scrollRef.current;
     if (!el) return;
 
@@ -101,11 +102,11 @@ const Resume = () => {
     observer.observe(el);
 
     return () => observer.disconnect();
-  }, [isPhone]);
+  }, [isCompact]);
 
   // Pinch to zoom and double tap to zoom
   useEffect(() => {
-    if (!isPhone) return;
+    if (!isCompact) return;
     const el = scrollRef.current;
     const content = contentRef.current;
     if (!el || !content) return;
@@ -209,7 +210,7 @@ const Resume = () => {
       el.removeEventListener("touchend", onTouchEnd);
       el.removeEventListener("touchcancel", onTouchEnd);
     };
-  }, [isPhone, changeZoom]);
+  }, [isCompact, changeZoom]);
 
   // Rendered once at the maximum size; zoom only scales it on screen.
   // Memoized so changing zoom never re-renders react-pdf.
@@ -252,7 +253,7 @@ const Resume = () => {
     );
   }, [baseWidth, numPages, renderWidth]);
 
-  if (!isPhone) {
+  if (!isCompact) {
     return (
       <>
         <div id="window-header">
@@ -294,27 +295,32 @@ const Resume = () => {
   };
 
   return (
-    <div className="relative h-full flex flex-col bg-white dark:bg-neutral-950 pt-20">
+    <div className="relative h-full flex flex-col bg-white dark:bg-neutral-950 pt-20 md:pt-24">
       {/* Header */}
-      <div className="relative flex items-center justify-center px-4 py-4">
+      <div className="relative flex items-center justify-center px-4 py-4 md:px-8 md:py-5">
         <button
           type="button"
           onClick={() => closeWindow("resume")}
-          className="absolute left-4 flex items-center gap-2 text-blue-500"
+          className="absolute left-4 md:left-8 flex items-center gap-2 text-blue-500"
         >
-          <ChevronLeft size={16} className="text-gray-700 dark:text-white" />
-          <span className="text-base">Voltar</span>
+          <ChevronLeft
+            size={16}
+            className="text-gray-700 dark:text-white md:size-5"
+          />
+          <span className="text-base md:text-lg">Voltar</span>
         </button>
 
-        <h2 className="text-lg text-gray-900 dark:text-white">Currículo</h2>
+        <h2 className="text-lg md:text-2xl text-gray-900 dark:text-white">
+          Currículo
+        </h2>
 
         <a
           href={PDF_PATH}
           download
           title="Baixar currículo"
-          className="absolute right-4 text-blue-500"
+          className="absolute right-4 md:right-8 text-blue-500"
         >
-          <Download size={20} />
+          <Download size={20} className="md:size-6" />
         </a>
       </div>
 
@@ -331,7 +337,7 @@ const Resume = () => {
 
       {/* Zoom bar */}
       <div
-        className="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center rounded-full bg-black/70 p-1 text-white shadow-lg backdrop-blur-md"
+        className="absolute bottom-32 md:bottom-40 left-1/2 -translate-x-1/2 flex items-center rounded-full bg-black/70 p-1 md:p-1.5 text-white shadow-lg backdrop-blur-md"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <button
@@ -345,9 +351,9 @@ const Resume = () => {
           onClick={(e) => {
             if (e.detail === 0) zoomBy(-ZOOM_STEP);
           }}
-          className="rounded-full p-2 active:bg-white/20 disabled:opacity-30"
+          className="rounded-full p-2 md:p-3 active:bg-white/20 disabled:opacity-30"
         >
-          <Minus size={16} />
+          <Minus size={16} className="md:size-5" />
         </button>
 
         <button
@@ -360,7 +366,7 @@ const Resume = () => {
           onClick={(e) => {
             if (e.detail === 0) zoomReset();
           }}
-          className="w-14 text-center text-xs font-medium tabular-nums"
+          className="w-14 md:w-20 text-center text-xs md:text-base font-medium tabular-nums"
         >
           {Math.round(zoom * 100)}%
         </button>
@@ -376,9 +382,9 @@ const Resume = () => {
           onClick={(e) => {
             if (e.detail === 0) zoomBy(ZOOM_STEP);
           }}
-          className="rounded-full p-2 active:bg-white/20 disabled:opacity-30"
+          className="rounded-full p-2 md:p-3 active:bg-white/20 disabled:opacity-30"
         >
-          <Plus size={16} />
+          <Plus size={16} className="md:size-5" />
         </button>
       </div>
     </div>

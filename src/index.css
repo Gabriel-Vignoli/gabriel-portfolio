@@ -354,7 +354,7 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-full max-sm:h-dvh max-sm:rounded-none;
+    @apply w-fit h-fit absolute top-16 left-7/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:w-full max-lg:h-dvh max-lg:rounded-none;
 
     #window-header {
       h2 {
