@@ -434,7 +434,7 @@ body {
   }
 
   #home {
-    @apply relative z-0 max-sm:hidden;
+    @apply relative z-0 max-lg:hidden;
 
     ul {
       li {
