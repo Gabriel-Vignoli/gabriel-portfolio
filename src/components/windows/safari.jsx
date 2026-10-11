@@ -37,8 +37,8 @@ const Safari = () => {
 
   return (
     <>
-      {/* Desktop and tablet */}
-      <div className="max-sm:hidden">
+      {/* Desktop only */}
+      <div className="max-lg:hidden">
         <div id="window-header">
           {/* left: draggable */}
           <div className="drag-handle flex items-center flex-1">
@@ -112,47 +112,53 @@ const Safari = () => {
         </div>
       </div>
 
-      {/* Phone */}
-      <div className="sm:hidden h-full flex flex-col bg-white dark:bg-neutral-950 pt-20">
+      {/* Phone and tablet */}
+      <div className="lg:hidden h-full flex flex-col bg-white dark:bg-neutral-950 pt-20 md:pt-24">
         {/* Header */}
-        <div className="relative flex items-center justify-center px-4 py-4">
+        <div className="relative flex items-center justify-center px-4 py-4 md:px-8 md:py-5">
           <button
             type="button"
             onClick={() => closeWindow("safari")}
-            className="absolute left-4 flex items-center gap-2 text-blue-500"
+            className="absolute left-4 md:left-8 flex items-center gap-2 text-blue-500"
           >
-            <ChevronLeft size={16} className="text-gray-700 dark:text-white" />
-            <span className="text-base">Voltar</span>
+            <ChevronLeft
+              size={16}
+              className="text-gray-700 dark:text-white md:size-5"
+            />
+            <span className="text-base md:text-lg">Voltar</span>
           </button>
 
-          <h2 className="text-lg text-gray-900 dark:text-white">
+          <h2 className="text-lg md:text-2xl text-gray-900 dark:text-white">
             Certificados
           </h2>
         </div>
 
         {/* Search */}
-        <div className="px-4 pb-3">
-          <div className="flex items-center gap-2 rounded-xl bg-gray-100 dark:bg-neutral-800 px-3 py-2.5">
-            <Search size={16} className="text-gray-400 dark:text-neutral-500" />
+        <div className="px-4 pb-3 md:px-8 md:pb-4">
+          <div className="flex items-center gap-2 md:gap-3 rounded-xl bg-gray-100 dark:bg-neutral-800 px-3 py-2.5 md:px-4 md:py-3.5">
+            <Search
+              size={16}
+              className="text-gray-400 dark:text-neutral-500 md:size-5"
+            />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar certificado"
-              className="flex-1 bg-transparent text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-neutral-500 outline-none"
+              className="flex-1 bg-transparent text-sm md:text-base text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-neutral-500 outline-none"
             />
           </div>
         </div>
 
         {/* Category chips */}
-        <div className="flex gap-2 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto px-4 pb-3 md:px-8 md:pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((category) => (
             <button
               key={category}
               type="button"
               onClick={() => setActiveCategory(category)}
               className={clsx(
-                "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors",
+                "shrink-0 rounded-full px-3.5 py-1.5 text-xs md:px-5 md:py-2 md:text-sm font-medium transition-colors",
                 activeCategory === category
                   ? "bg-blue-500 text-white"
                   : "bg-gray-100 text-gray-700 dark:bg-neutral-800 dark:text-neutral-300",
@@ -164,44 +170,46 @@ const Safari = () => {
         </div>
 
         {/* Cards */}
-        <div className="flex-1 space-y-3 overflow-y-auto px-4 pb-28">
+        <div className="flex-1 min-h-0 overflow-y-auto px-4 md:px-8 pb-32">
           {filteredCourses.length === 0 ? (
-            <p className="py-10 text-center text-sm text-gray-500 dark:text-neutral-400">
+            <p className="py-10 text-center text-sm md:text-base text-gray-500 dark:text-neutral-400">
               Nenhum certificado encontrado.
             </p>
           ) : (
-            filteredCourses.map((course) => (
-              <a
-                key={course.id}
-                href={course.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-2xl bg-gray-50 dark:bg-neutral-900 p-3"
-              >
-                <img
-                  src={course.imageURL}
-                  alt={course.title}
-                  className="size-16 shrink-0 rounded-xl object-cover"
-                />
+            <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+              {filteredCourses.map((course) => (
+                <a
+                  key={course.id}
+                  href={course.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 md:gap-4 rounded-2xl bg-gray-50 dark:bg-neutral-900 p-3 md:p-4"
+                >
+                  <img
+                    src={course.imageURL}
+                    alt={course.title}
+                    className="size-16 md:size-24 shrink-0 rounded-xl object-cover"
+                  />
 
-                <div className="min-w-0 flex-1">
-                  <span className="text-[10px] font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
-                    {course.category}
-                  </span>
-                  <h3 className="line-clamp-2 text-sm font-semibold text-gray-900 dark:text-white">
-                    {course.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 dark:text-neutral-400">
-                    {course.issuer} · {course.date}
-                  </p>
-                </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
+                      {course.category}
+                    </span>
+                    <h3 className="line-clamp-2 text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
+                      {course.title}
+                    </h3>
+                    <p className="text-xs md:text-sm text-gray-500 dark:text-neutral-400">
+                      {course.issuer} · {course.date}
+                    </p>
+                  </div>
 
-                <MoveRight
-                  size={16}
-                  className="shrink-0 text-gray-400 dark:text-neutral-500"
-                />
-              </a>
-            ))
+                  <MoveRight
+                    size={16}
+                    className="shrink-0 text-gray-400 dark:text-neutral-500 md:size-5"
+                  />
+                </a>
+              ))}
+            </div>
           )}
         </div>
       </div>
