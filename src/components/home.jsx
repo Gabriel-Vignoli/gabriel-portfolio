@@ -2,40 +2,48 @@ import clsx from "clsx";
 import { locations } from "../constants";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
-import useWindowStore from "../store/window";
-import useLocationStore from "../store/location";
 
-const projects = locations.work.children ?? []
+const projects = locations.work.children ?? [];
+
+const mobileApps = [
+  { id: "pen", name: "Notas", icon: "/images/pen.png" },
+  { id: "terminal", name: "Terminal", icon: "/images/terminal.png" },
+];
 
 const Home = () => {
-    const { setActiveLocation } = useLocationStore()
-    const { openWindow } = useWindowStore();
+  useGSAP(() => {
+    Draggable.create(".folder");
+  }, []);
 
-    const handleOpenProjectFinder = (project) => {
-        setActiveLocation(project)
-        openWindow("finder")
-    }
+  return (
+    <>
+      {/* Desktop folders */}
+      <section id="home">
+        <ul>
+          {projects.map((project) => {
+            return (
+              <li
+                key={project.id}
+                className={clsx("group folder", project.windowPosition)}
+              >
+                <img src="/images/folder.png" alt="Folder" />
+                <p>{project.name}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
-    useGSAP(() => {
-        Draggable.create(".folder")
-    })
+      {/* Phone and tablet icons */}
+      <section id="mobile-home">
+        {mobileApps.map(({ id, name, icon }) => (
+          <button key={id} type="button" aria-label={name}>
+            <img src={icon} alt={name} />
+          </button>
+        ))}
+      </section>
+    </>
+  );
+};
 
-    return ( 
-        <section id="home">
-            <ul>
-                {projects.map((project) => (
-                    <li key={project.id} className={clsx("group folder",
-                        project.windowPosition
-                    )}
-                    onClick={() => handleOpenProjectFinder(project)}
-                    >
-                        <img src="/images/folder.png" alt="Folder" />
-                        <p>{project.name}</p>
-                    </li>
-                ))}
-            </ul>
-        </section>
-     );
-}
- 
 export default Home;

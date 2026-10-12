@@ -450,6 +450,18 @@ body {
       }
     }
   }
+
+  #mobile-home {
+    @apply lg:hidden absolute top-24 md:top-32 left-0 z-0 flex gap-6 md:gap-10 px-6 md:px-12;
+
+    button {
+      @apply select-none active:scale-95 transition-transform;
+    }
+
+    img {
+      @apply size-20 md:size-28 object-contain;
+    }
+  }
 }
 
 .blog::-webkit-scrollbar {
