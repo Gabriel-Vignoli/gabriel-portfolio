@@ -2,15 +2,18 @@ import clsx from "clsx";
 import { locations } from "../constants";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
+import useWindowStore from "../store/window";
 
 const projects = locations.work.children ?? [];
 
 const mobileApps = [
-  { id: "pen", name: "Notas", icon: "/images/pen.png" },
+  { id: "resume", name: "Currículo", icon: "/images/pen.png" },
   { id: "terminal", name: "Terminal", icon: "/images/terminal.png" },
 ];
 
 const Home = () => {
+  const { openWindow } = useWindowStore();
+
   useGSAP(() => {
     Draggable.create(".folder");
   }, []);
@@ -37,7 +40,12 @@ const Home = () => {
       {/* Phone and tablet icons */}
       <section id="mobile-home">
         {mobileApps.map(({ id, name, icon }) => (
-          <button key={id} type="button" aria-label={name}>
+          <button
+            key={id}
+            type="button"
+            aria-label={name}
+            onClick={() => openWindow(id)}
+          >
             <img src={icon} alt={name} />
           </button>
         ))}

@@ -216,7 +216,7 @@ body {
   }
 
   #terminal {
-    @apply w-3xl absolute top-32 left-1/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-3xl absolute top-32 left-1/12 bg-white dark:bg-neutral-950 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:w-full max-lg:h-dvh max-lg:rounded-none max-lg:overflow-y-auto max-lg:pt-20 md:max-lg:pt-24;
 
     h2 {
       @apply font-bold text-sm text-center w-full dark:text-white;
