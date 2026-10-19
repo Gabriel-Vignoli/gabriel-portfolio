@@ -70,9 +70,7 @@ const Navbar = () => {
                   />
                 </li>
               ))}
-            <li>
-              <ThemeSwitcher />
-            </li>
+            <ThemeSwitcher />
           </ul>
 
           <time>{formattedDate}</time>
