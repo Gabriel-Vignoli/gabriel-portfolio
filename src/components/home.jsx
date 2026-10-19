@@ -3,6 +3,7 @@ import { locations } from "../constants";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
 import useWindowStore from "../store/window";
+import useLocationStore from "../store/location"; // adjust to your store
 
 const projects = locations.work.children ?? [];
 
@@ -13,6 +14,12 @@ const mobileApps = [
 
 const Home = () => {
   const { openWindow } = useWindowStore();
+  const { setActiveLocation } = useLocationStore();
+
+  const handleOpenFolder = (project) => {
+    setActiveLocation(project); 
+    openWindow("finder");     
+  };
 
   useGSAP(() => {
     Draggable.create(".folder");
@@ -23,17 +30,16 @@ const Home = () => {
       {/* Desktop folders */}
       <section id="home">
         <ul>
-          {projects.map((project) => {
-            return (
-              <li
-                key={project.id}
-                className={clsx("group folder", project.windowPosition)}
-              >
-                <img src="/images/folder.png" alt="Folder" />
-                <p>{project.name}</p>
-              </li>
-            );
-          })}
+          {projects.map((project) => (
+            <li
+              key={project.id}
+              className={clsx("group folder", project.windowPosition)}
+              onDoubleClick={() => handleOpenFolder(project)}
+            >
+              <img src="/images/folder.png" alt="Folder" />
+              <p>{project.name}</p>
+            </li>
+          ))}
         </ul>
       </section>
 
