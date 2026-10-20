@@ -8,13 +8,26 @@ const FONT_WEIGHT = {
 };
 
 const renderText = (text, className, baseWeight = 400) => {
-  return [...text].map((char, index) => (
-    <span
-      key={index}
-      className={className}
-      style={{ fontVariationSettings: `'wght' ${baseWeight}` }}
-    >
-      {char === " " ? "\u00A0" : char}
+  const words = text.split(" ");
+
+  return words.map((word, wordIndex) => (
+    <span key={wordIndex} className="inline">
+      {/* Each word is one unbreakable block, so lines only break between words */}
+      <span className="inline-block whitespace-nowrap">
+        {[...word].map((char, charIndex) => (
+          <span
+            key={charIndex}
+            data-letter
+            className={className}
+            style={{ fontVariationSettings: `'wght' ${baseWeight}` }}
+          >
+            {char}
+          </span>
+        ))}
+      </span>
+
+      {/* Normal, breakable space between words */}
+      {wordIndex < words.length - 1 && <span className={className}> </span>}
     </span>
   ));
 };
@@ -22,7 +35,7 @@ const renderText = (text, className, baseWeight = 400) => {
 const setupTextHover = (container, type) => {
   if (!container) return;
 
-  const letters = container.querySelectorAll("span");
+  const letters = container.querySelectorAll("[data-letter]");
   const { min, max, default: base } = FONT_WEIGHT[type];
 
   const animateLetter = (letter, weight, duration = 0.25) => {
@@ -82,10 +95,10 @@ const Welcome = () => {
           100,
         )}
       </p>
-      <h1 ref={titleRef} className="mt-6 md:mt-7">
+      <h1 ref={titleRef} className="mt-6 md:mt-7 text-center">
         {renderText(
           "portfólio",
-          "text-7xl sm:text-8xl md:text-9xl lg:text-9xl italic font-georama",
+          "text-6xl sm:text-8xl md:text-9xl lg:text-9xl italic font-georama",
         )}
       </h1>
     </section>
