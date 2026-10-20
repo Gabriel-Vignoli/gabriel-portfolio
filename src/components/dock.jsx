@@ -10,6 +10,7 @@ const Dock = () => {
   const { openWindow, closeWindow, window: windows } = useWindowStore();
   const dockRef = useRef(null);
 
+  // Hover magnify effect
   useGSAP(() => {
     const dock = dockRef.current;
     if (!dock) return;
@@ -56,6 +57,39 @@ const Dock = () => {
     };
   }, []);
 
+  // Intro animation: bar slides up, then icons pop in
+  useGSAP(() => {
+    const dock = dockRef.current;
+    if (!dock) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const items = dock.querySelectorAll("[data-dock-item]");
+
+    const tl = gsap.timeline({ delay: 1.2 });
+
+    tl.fromTo(
+      dock,
+      { y: 120 },
+      { y: 0, duration: 0.8, ease: "power3.out", clearProps: "transform" },
+    ).fromTo(
+      items,
+      { opacity: 0, scale: 0.4, y: 30 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+        stagger: 0.07,
+        clearProps: "transform,opacity",
+      },
+      "-=0.4",
+    );
+
+    return () => tl.kill();
+  }, []);
+
   const toggleApp = (app) => {
     if (!app.canOpen) return;
 
@@ -66,8 +100,6 @@ const Dock = () => {
     } else {
       openWindow(app.id);
     }
-
-    console.log(windows);
   };
 
   const HIDDEN_ON_SMALL = ["terminal", "trash"];
@@ -78,6 +110,7 @@ const Dock = () => {
         {dockApps.map(({ id, name, icon, canOpen }) => (
           <div
             key={id}
+            data-dock-item
             className={clsx(
               "relative justify-center",
               HIDDEN_ON_SMALL.includes(id) ? "hidden lg:flex" : "flex",
@@ -95,9 +128,10 @@ const Dock = () => {
             >
               <img
                 src={`/images/${icon}`}
+                alt={name}
                 loading="lazy"
                 className={canOpen ? "" : "opacity-60"}
-              ></img>
+              />
             </button>
           </div>
         ))}
