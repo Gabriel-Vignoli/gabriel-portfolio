@@ -18,7 +18,7 @@ const renderText = (text, className, baseWeight = 400) => {
           <span
             key={charIndex}
             data-letter
-            className={className}
+            className={`${className} inline-block`}
             style={{ fontVariationSettings: `'wght' ${baseWeight}` }}
           >
             {char}
@@ -77,12 +77,70 @@ const Welcome = () => {
   const subtitleRef = useRef(null);
 
   useGSAP(() => {
-    const cleanupTitle = setupTextHover(titleRef.current, "title");
-    const cleanupSubtitle = setupTextHover(subtitleRef.current, "subtitle");
+    const title = titleRef.current;
+    const subtitle = subtitleRef.current;
+    if (!title || !subtitle) return;
+
+    const subtitleLetters = subtitle.querySelectorAll("[data-letter]");
+    const titleLetters = title.querySelectorAll("[data-letter]");
+
+    let cleanups = [];
+
+    // Hover effect only turns on after the intro animation ends
+    const enableHover = () => {
+      cleanups = [
+        setupTextHover(title, "title"),
+        setupTextHover(subtitle, "subtitle"),
+      ];
+    };
+
+    const cleanup = () => cleanups.forEach((fn) => fn?.());
+
+    // Respect "reduce motion": skip the intro
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      enableHover();
+      return cleanup;
+    }
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: enableHover,
+    });
+
+    tl.fromTo(
+      subtitleLetters,
+      { opacity: 0, y: 20, filter: "blur(8px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 0.8,
+        stagger: 0.025,
+        clearProps: "filter,transform",
+      },
+    ).fromTo(
+      titleLetters,
+      {
+        opacity: 0,
+        yPercent: 60,
+        filter: "blur(12px)",
+        fontVariationSettings: "'wght' 100",
+      },
+      {
+        opacity: 1,
+        yPercent: 0,
+        filter: "blur(0px)",
+        fontVariationSettings: "'wght' 400",
+        duration: 1,
+        stagger: 0.06,
+        clearProps: "filter,transform",
+      },
+      "-=0.4",
+    );
 
     return () => {
-      cleanupTitle?.();
-      cleanupSubtitle?.();
+      tl.kill();
+      cleanup();
     };
   }, []);
 
