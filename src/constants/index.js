@@ -316,7 +316,7 @@ const WORK_LOCATION = {
         {
           id: 1,
           name: "GitHub - vig-barber",
-          icon: "/images/github.png",
+          icon: "/icons/github.svg",
           kind: "file",
           fileType: "url",
           href: "https://github.com/Gabriel-Vignoli/vig-barber",
@@ -355,7 +355,7 @@ const WORK_LOCATION = {
         {
           id: 1,
           name: "GitHub - FitPlan-Admin-Dashboard",
-          icon: "/images/github.png",
+          icon: "/icons/github.svg",
           kind: "file",
           fileType: "url",
           href: "https://github.com/Gabriel-Vignoli/FitPlan-Admin-Dashboard",
@@ -394,7 +394,7 @@ const WORK_LOCATION = {
         {
           id: 1,
           name: "GitHub - GSAP-Landing-Page",
-          icon: "/images/github.png",
+          icon: "/icons/github.svg",
           kind: "file",
           fileType: "url",
           href: "https://github.com/Gabriel-Vignoli/GSAP-Landing-Page",
@@ -433,7 +433,7 @@ const WORK_LOCATION = {
         {
           id: 1,
           name: "GitHub - mackbook-landing-page",
-          icon: "/images/github.png",
+          icon: "/icons/github.svg",
           kind: "file",
           fileType: "url",
           href: "https://github.com/Gabriel-Vignoli/mackbook-landing-page",
