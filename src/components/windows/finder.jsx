@@ -84,12 +84,12 @@ const Finder = () => {
             </div>
           </div>
 
-          <ul className="content">
+          <ul className="content grid! grid-cols-3 content-start gap-x-4 gap-y-8 p-8 overflow-y-auto">
             {activeLocation?.children.map((item) => (
               <li
                 key={item.id}
-                className={item.position}
                 onClick={() => openItem(item)}
+                className="static! flex flex-col items-center gap-2 text-center cursor-pointer"
               >
                 <img src={item.icon} alt={item.name} />
                 <p>{item.name}</p>
