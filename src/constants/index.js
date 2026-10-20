@@ -507,9 +507,9 @@ const ABOUT_LOCATION = {
       image: "/images/gabriel.jpg",
       description: [
         "Olá! Sou o Gabriel 👋, estudante de Análise e Desenvolvimento de Sistemas na FATEC Mococa e desenvolvedor júnior em busca da minha primeira oportunidade na área.",
-        "Trabalho principalmente com JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, Prisma e TailwindCSS — e gosto de deixar tudo com uma boa experiência de uso.",
+        "Trabalho principalmente com JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, Prisma e TailwindCSS. Ggosto de deixar tudo com uma boa experiência de uso.",
         "Sou bastante focado em UI limpa, boa UX e em escrever código organizado e fácil de manter.",
-        "Fora da programação, você me encontra treinando musculação, praticando Muay Thai, jogando futsal ou curtindo um bom jogo no PC 😅",
+        "Fora da programação, você me encontra treinando musculação, correndo, andando de bicicleta ou curtindo um bom jogo no PC ",
       ],
     },
   ],
