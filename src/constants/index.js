@@ -297,7 +297,6 @@ const courses = [
     imageURL: "/images/certificates/onebitcode.png",
   },
 ];
-
 const WORK_LOCATION = {
   id: 1,
   type: "work",
@@ -347,7 +346,7 @@ const WORK_LOCATION = {
     // ▶ Project 2
     {
       id: 6,
-      name: "SBN Circuito - Inscrições",
+      name: "FitPlan - Admin Dashboard",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
@@ -355,25 +354,25 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "GitHub - sbn-circuito-inscricoes",
+          name: "GitHub - FitPlan-Admin-Dashboard",
           icon: "/images/github.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/Gabriel-Vignoli/sbn-circuito-inscricoes",
+          href: "https://github.com/Gabriel-Vignoli/FitPlan-Admin-Dashboard",
           position: "top-5 right-10",
         },
         {
           id: 2,
-          name: "sbn-circuito.com",
+          name: "montanini-dashboard (admin only)",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/Gabriel-Vignoli/sbn-circuito-inscricoes",
+          href: "https://montanini-dashboard.vercel.app/",
           position: "top-20 left-20",
         },
         {
           id: 4,
-          name: "sbn-circuito.png",
+          name: "fitplan.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
@@ -386,7 +385,7 @@ const WORK_LOCATION = {
     // ▶ Project 3
     {
       id: 7,
-      name: "Restaurante Carijó - Landing Page",
+      name: "GSAP - Landing Page",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
@@ -394,30 +393,69 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "GitHub - carijo",
+          name: "GitHub - GSAP-Landing-Page",
           icon: "/images/github.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/Gabriel-Vignoli/restaurante-carijo",
+          href: "https://github.com/Gabriel-Vignoli/GSAP-Landing-Page",
           position: "top-5 left-10",
         },
         {
           id: 2,
-          name: "restaurantecarijo.com.br",
+          name: "gsap-landing-page.com",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://restaurantecarijo.com.br",
+          href: "https://gsap-landing-page-d6lm.vercel.app/",
           position: "top-10 right-20",
         },
         {
           id: 4,
-          name: "carijo.png",
+          name: "gsap-landing.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
           position: "top-52 right-80",
           imageUrl: "/images/project-3.png",
+        },
+      ],
+    },
+
+    // ▶ Project 4
+    {
+      id: 8,
+      name: "MacBook - Landing Page",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 left-20",
+      windowPosition: "top-[46vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "GitHub - mackbook-landing-page",
+          icon: "/images/github.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/Gabriel-Vignoli/mackbook-landing-page",
+          position: "top-5 right-10",
+        },
+        {
+          id: 2,
+          name: "macbook-landing-page.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://mackbook-landing-page-7krq82td3-gabriels-projects-20a4593b.vercel.app/",
+          position: "top-20 left-20",
+        },
+        {
+          id: 4,
+          name: "macbook.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 left-80",
+          imageUrl: "/images/project-4.png",
         },
       ],
     },
