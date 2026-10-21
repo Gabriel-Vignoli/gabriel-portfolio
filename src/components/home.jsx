@@ -11,7 +11,7 @@ const projects = locations.work.children ?? [];
 
 const mobileApps = [
   { id: "resume", name: "Currículo", icon: "/images/pen.png" },
-  { id: "terminal", name: "Terminal", icon: "/images/terminal.png" },
+  { id: "terminal", name: "Habilidades", icon: "/images/terminal.png" },
 ];
 
 const Home = () => {
@@ -36,7 +36,8 @@ const Home = () => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const folders = desktopRef.current?.querySelectorAll(".folder") ?? [];
-    const mobileIcons = mobileRef.current?.querySelectorAll("img") ?? [];
+    const mobileApps =
+      mobileRef.current?.querySelectorAll("[data-mobile-app]") ?? [];
 
     const tl = gsap.timeline({ delay: 0.8 });
 
@@ -57,10 +58,11 @@ const Home = () => {
       );
     }
 
-    // Phone and tablet icons: animate the img, not the button
-    if (mobileIcons.length) {
+    // Phone and tablet icons: animate the inner wrapper (icon + label),
+    // not the button, so it doesn't clash with the button's press effect
+    if (mobileApps.length) {
       tl.fromTo(
-        mobileIcons,
+        mobileApps,
         { opacity: 0, scale: 0.5, y: 20 },
         {
           opacity: 1,
@@ -99,13 +101,13 @@ const Home = () => {
       {/* Phone and tablet icons */}
       <section id="mobile-home" ref={mobileRef}>
         {mobileApps.map(({ id, name, icon }) => (
-          <button
-            key={id}
-            type="button"
-            aria-label={name}
-            onClick={() => openWindow(id)}
-          >
-            <img src={icon} alt={name} />
+          <button key={id} type="button" onClick={() => openWindow(id)}>
+            <div data-mobile-app className="flex flex-col items-center gap-1.5">
+              <img src={icon} alt="" />
+              <span className="w-22 md:w-28 truncate text-center text-xs md:text-base font-medium text-white drop-shadow-md">
+                {name}
+              </span>
+            </div>
           </button>
         ))}
       </section>
