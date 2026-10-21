@@ -106,6 +106,7 @@ const techStack = [
   }
 ];
 
+
 const courses = [
   {
     id: 1,
@@ -141,7 +142,7 @@ const courses = [
     category: "Design",
     date: "Mar de 2025",
     link: "https://drive.google.com/file/d/1xJY87ORdfCO2KPLVZIjYinlMusM-nHIh/view?usp=sharing",
-    imageURL: "/images/certificates/framer-skills.png",
+    imageURL: "/images/certificates/frammer.png",
   },
   {
     id: 5,
@@ -150,7 +151,7 @@ const courses = [
     category: "Backend",
     date: "Jul de 2024",
     link: "https://drive.google.com/file/d/1RR67UT0TFkX6F2aYFEmWmlFCaqMLQXKx/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-banco-de-dados.png",
   },
   {
     id: 6,
@@ -159,7 +160,7 @@ const courses = [
     category: "Frontend",
     date: "Jul de 2024",
     link: "https://drive.google.com/file/d/1eaWgCFElL22vKiENhneesOaWD3bCVkEk/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-tailwindcss.png",
   },
   {
     id: 7,
@@ -168,7 +169,7 @@ const courses = [
     category: "Design",
     date: "Jul de 2024",
     link: "https://drive.google.com/file/d/15ietjup3D10jntxokXaI7AzYKq4OZPN7/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-ui-ux.png",
   },
   {
     id: 8,
@@ -177,7 +178,7 @@ const courses = [
     category: "Full Stack",
     date: "Jun de 2024",
     link: "https://drive.google.com/file/d/1-cJ_9s5EpupObGRmxrUCXjz3WlZYHBrZ/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-full-stack-javascript.png",
   },
   {
     id: 9,
@@ -186,7 +187,7 @@ const courses = [
     category: "Frontend",
     date: "Jun de 2024",
     link: "https://drive.google.com/file/d/1tde--s5TU43NvPQgcmbdROh9V9hArNsV/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-ead-netflix.png",
   },
   {
     id: 10,
@@ -195,7 +196,7 @@ const courses = [
     category: "Backend",
     date: "Abr de 2024",
     link: "https://drive.google.com/file/d/10F0Hb-8hcJUwbJrZWRDwGH6TXqImXkvx/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-mongodb.png",
   },
   {
     id: 11,
@@ -204,7 +205,7 @@ const courses = [
     category: "Frontend",
     date: "Mar de 2024",
     link: "https://drive.google.com/file/d/1JW2RTtHUf_GmjugoUUmEZ98XOs1zJTmG/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-next.png",
   },
   {
     id: 12,
@@ -213,7 +214,7 @@ const courses = [
     category: "Backend",
     date: "Abr de 2024",
     link: "https://drive.google.com/file/d/1xTEYwzBHapPL3UzHEZ0-1Gn9xne_pANu/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-sql-no-nodejs.png",
   },
   {
     id: 13,
@@ -222,7 +223,7 @@ const courses = [
     category: "Backend",
     date: "Abr de 2024",
     link: "https://drive.google.com/file/d/1Q_KqRtyx5BAt0d-bVdWJAI7Rl-XImtTs/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-nodejs.png",
   },
   {
     id: 14,
@@ -231,7 +232,7 @@ const courses = [
     category: "Frontend",
     date: "Mar de 2024",
     link: "https://drive.google.com/file/d/19wi8uEXnu3hR-IK26kClbAZ5jurlafFk/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-react.png",
   },
   {
     id: 15,
@@ -240,7 +241,7 @@ const courses = [
     category: "Frontend",
     date: "Mar de 2024",
     link: "https://drive.google.com/file/d/1K2DUhjtRTP2d4E_orP3UZdqR5_5FVim9/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-bootstrap.png",
   },
   {
     id: 16,
@@ -249,7 +250,7 @@ const courses = [
     category: "Ferramentas",
     date: "Jun de 2024",
     link: "https://drive.google.com/file/d/1KwULV4KgRnW6OMZaO12xsadQelANUj6e/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-git.png",
   },
   {
     id: 17,
@@ -258,7 +259,7 @@ const courses = [
     category: "Frontend",
     date: "Jan de 2024",
     link: "https://drive.google.com/file/d/1WQR2SUUbMOVExe1FIVmExJZTgpi067p3/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-typescript.png",
   },
   {
     id: 18,
@@ -267,7 +268,7 @@ const courses = [
     category: "Frontend",
     date: "Jan de 2024",
     link: "https://drive.google.com/file/d/1p7Mvj0PqiagY_VPe9IJiKmPL3FAr4ddh/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-javascript.png",
   },
   {
     id: 19,
@@ -276,7 +277,7 @@ const courses = [
     category: "Frontend",
     date: "Fev de 2024",
     link: "https://drive.google.com/file/d/1IVabyybqU3h_EckUA7p7VfwueKh3xI96/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-css-moderno.png",
   },
   {
     id: 20,
@@ -285,7 +286,7 @@ const courses = [
     category: "Frontend",
     date: "Dez de 2023",
     link: "https://drive.google.com/file/d/1Zjo_SalOPISL9LooYeNMd2v9XgvVIlP9/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-css3.png",
   },
   {
     id: 21,
@@ -294,7 +295,7 @@ const courses = [
     category: "Frontend",
     date: "Dez de 2023",
     link: "https://drive.google.com/file/d/152ZP6gay2dZLpnK5aMSoy25dj_Cxevoe/view?usp=sharing",
-    imageURL: "/images/certificates/onebitcode.png",
+    imageURL: "/images/certificates/onebitcode-html5.png",
   },
 ];
 const WORK_LOCATION = {
