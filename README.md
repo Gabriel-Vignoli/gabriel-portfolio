@@ -11,7 +11,7 @@ Draggable windows, a magnifying dock, a Finder to browse projects, and a full to
 [![GSAP](https://img.shields.io/badge/GSAP-88CE02?logo=greensock&logoColor=black)](https://gsap.com)
 [![Zustand](https://img.shields.io/badge/Zustand-433E38)](https://zustand.docs.pmnd.rs)
 
-[**🔗 Live demo**](https://YOUR-DEPLOY-URL.vercel.app) · [**💻 GitHub**](https://github.com/Gabriel-Vignoli)
+[**🔗 Live demo**](https://gabriel-portfolio-snowy.vercel.app) · [**💻 GitHub**](https://github.com/Gabriel-Vignoli)
 
 </div>
 
