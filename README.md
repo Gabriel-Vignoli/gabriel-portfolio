@@ -17,6 +17,18 @@ Draggable windows, a magnifying dock, a Finder to browse projects, and a full to
 
 ---
 
+## 📸 Preview
+
+<div align="center">
+
+![Desktop view](./docs/desktop.png)
+
+<img src="./docs/mobile.png" alt="Mobile home" width="240" />
+
+</div>
+
+---
+
 ## ✨ Features
 
 ### Desktop experience
