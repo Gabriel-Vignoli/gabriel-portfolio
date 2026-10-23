@@ -128,7 +128,7 @@ const Home = () => {
                 className={clsx(
                   "relative flex items-center justify-center size-[4.2rem] md:size-[5.2rem] rounded-2xl md:rounded-[1.25rem] backdrop-blur-md border transition-[background-color,border-color,box-shadow] duration-500 ease-out",
                   isDark
-                    ? "bg-black/90 border-white/10 shadow-soft-dark"
+                    ? "bg-black/90 border-white/40 shadow-soft-dark"
                     : "bg-white/80 border-white/60 shadow-soft-light",
                 )}
               >
