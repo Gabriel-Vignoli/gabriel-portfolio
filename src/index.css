@@ -19,6 +19,18 @@ body {
   --font-georama: "Georama", sans-serif;
   --font-roboto: "Roboto Mono", monospace;
   --breakpoint-3xl: 1920px;
+
+  --shadow-soft-light:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 1px rgba(0, 0, 0, 0.02),
+    0 2px 2px rgba(0, 0, 0, 0.02), 0 4px 4px rgba(0, 0, 0, 0.02),
+    0 8px 8px rgba(0, 0, 0, 0.02), 0 16px 16px rgba(0, 0, 0, 0.02),
+    0 32px 32px rgba(0, 0, 0, 0.02), 0 48px 48px rgba(0, 0, 0, 0.015);
+
+  --shadow-soft-dark:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 1px rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.03),
+    0 8px 8px rgba(0, 0, 0, 0.03), 0 16px 16px rgba(0, 0, 0, 0.03),
+    0 32px 32px rgba(0, 0, 0, 0.03), 0 48px 48px rgba(0, 0, 0, 0.02);
 }
 
 @utility flex-center {

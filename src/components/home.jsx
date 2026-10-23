@@ -120,17 +120,16 @@ const Home = () => {
             </div>
           </button>
         ))}
-
         {/* Theme toggle */}
         <button type="button" onClick={toggleTheme} aria-label="Alternar tema">
           <div data-mobile-app className="flex flex-col items-center gap-1.5">
             <div className="flex items-center justify-center size-22 md:size-28">
               <div
                 className={clsx(
-                  "relative flex items-center justify-center size-[4.2rem] md:size-[5.2rem] rounded-2xl md:rounded-[1.25rem] backdrop-blur-md shadow-lg border transition-colors duration-500 ease-out",
+                  "relative flex items-center justify-center size-[4.2rem] md:size-[5.2rem] rounded-2xl md:rounded-[1.25rem] backdrop-blur-md border transition-[background-color,border-color,box-shadow] duration-500 ease-out",
                   isDark
-                    ? "bg-black/90 border-white/10"
-                    : "bg-white/80 border-white/60",
+                    ? "bg-black/90 border-white/10 shadow-soft-dark"
+                    : "bg-white/80 border-white/60 shadow-soft-light",
                 )}
               >
                 <Sun
